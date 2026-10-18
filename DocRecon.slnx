@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DocRecon.Core/DocRecon.Core.csproj" />
+  <Project Path="DocRecon.Tests/DocRecon.Tests.csproj" />
+</Solution>

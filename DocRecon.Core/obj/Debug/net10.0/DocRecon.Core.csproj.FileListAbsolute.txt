@@ -1,0 +1,11 @@
+C:\docrecon_clean\DocRecon.Core\bin\Debug\net10.0\DocRecon.Core.deps.json
+C:\docrecon_clean\DocRecon.Core\bin\Debug\net10.0\DocRecon.Core.dll
+C:\docrecon_clean\DocRecon.Core\bin\Debug\net10.0\DocRecon.Core.pdb
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.AssemblyInfoInputs.cache
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.AssemblyInfo.cs
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.csproj.CoreCompileInputs.cache
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.dll
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\refint\DocRecon.Core.dll
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.pdb
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\ref\DocRecon.Core.dll
