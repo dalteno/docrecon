@@ -98,3 +98,4 @@ C:\docrecon_clean\DocRecon.Tests\obj\Debug\net10.0\refint\DocRecon.Tests.dll
 C:\docrecon_clean\DocRecon.Tests\obj\Debug\net10.0\DocRecon.Tests.pdb
 C:\docrecon_clean\DocRecon.Tests\obj\Debug\net10.0\DocRecon.Tests.genruntimeconfig.cache
 C:\docrecon_clean\DocRecon.Tests\obj\Debug\net10.0\ref\DocRecon.Tests.dll
+C:\docrecon_clean\DocRecon.Tests\obj\Debug\net10.0\DocRecon.Tests.sourcelink.json

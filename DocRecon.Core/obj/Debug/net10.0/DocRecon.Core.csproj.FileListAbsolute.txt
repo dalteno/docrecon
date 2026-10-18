@@ -9,3 +9,4 @@ C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.dll
 C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\refint\DocRecon.Core.dll
 C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.pdb
 C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\ref\DocRecon.Core.dll
+C:\docrecon_clean\DocRecon.Core\obj\Debug\net10.0\DocRecon.Core.sourcelink.json

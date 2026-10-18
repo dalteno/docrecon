@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocRecon.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+377077dd58ef08a13d65bee868b6667c8656d4cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocRecon.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocRecon.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
