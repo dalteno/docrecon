@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R04",
+      "code": "LINE_EXTRA_IN_PACKING",
+      "severity": "BLOCKER",
+      "key": "BLT-M8",
+      "field": "sku",
+      "expected": "present on invoice",
+      "actual": "absent",
+      "reason": "Packed SKU BLT-M8 is not on the invoice.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "invoice:PMP-200:unitPrice",
+      "field": "unitPrice",
+      "expected": "number",
+      "actual": "1.200,00",
+      "reason": "Invoice line PMP-200: unitPrice is not a number.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

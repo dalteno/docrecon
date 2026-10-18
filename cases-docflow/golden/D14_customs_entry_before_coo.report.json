@@ -1,0 +1,347 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 5,
+    "missing": 1
+  },
+  "reconciliation": {
+    "at": "2026-03-10",
+    "status": "PASS",
+    "blockers": 0,
+    "warnings": 0,
+    "findings": [],
+    "inputVersions": "COMMERCIAL_INVOICE@1,PACKING_LIST@1,BILL_OF_LADING@1"
+  },
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 12,
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 17,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 21,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 22,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "CUSTOMS_ENTRY",
+      "rule": "F08",
+      "reason": "CUSTOMS_ENTRY requires approved CERTIFICATE_OF_ORIGIN"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1"
+    },
+    {
+      "seq": 6,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 7,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 8,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-BILL_OF_LADING-v1"
+    },
+    {
+      "seq": 10,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "fields": [
+        "number",
+        "shipmentRef",
+        "containers",
+        "seals"
+      ]
+    },
+    {
+      "seq": 11,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 12,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 13,
+      "type": "ReconciliationRun",
+      "at": "2026-03-10",
+      "status": "PASS",
+      "blockers": 0,
+      "warnings": 0,
+      "findings": [],
+      "rule": "F07"
+    },
+    {
+      "seq": 14,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1"
+    },
+    {
+      "seq": 15,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "fields": [
+        "number",
+        "originCountry",
+        "invoiceRef"
+      ]
+    },
+    {
+      "seq": 16,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 17,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 18,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "version": 1,
+      "sha": "sha-CUSTOMS_ENTRY-v1"
+    },
+    {
+      "seq": 19,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "fields": [
+        "entryNo",
+        "declaredValue",
+        "hsCodes"
+      ]
+    },
+    {
+      "seq": 20,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 21,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 22,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "CUSTOMS_ENTRY",
+      "rule": "F08",
+      "reason": "CUSTOMS_ENTRY requires approved CERTIFICATE_OF_ORIGIN"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "D08_reject_resubmit",
+  "title": "Rejection without reason → F14; with reason → REJECTED + intake notified; approving a rejected doc → F03; v2 approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+      "payload": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417",
+        "issuer": "Chamber of Commerce Alexandria"
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "REJECT",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "reason": "",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "REJECT",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "reason": "issuer stamp missing",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "version": 2,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v2",
+      "payload": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417",
+        "issuer": "Chamber of Commerce Alexandria"
+      },
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "at": "2026-03-12"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "APPROVED",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F03|CERTIFICATE_OF_ORIGIN",
+      "F14|CERTIFICATE_OF_ORIGIN"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 3,
+    "integrationQueued": 1,
+    "integrationAcked": 0
+  }
+}

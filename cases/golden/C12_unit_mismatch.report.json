@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R19",
+      "code": "UNIT_MISMATCH",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "unit",
+      "expected": "PCS",
+      "actual": "KG",
+      "reason": "SKU GSK-012: invoice unit PCS, packing unit KG.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "C22_thousands_separator",
+  "title": "Price '1,200.00' with thousands separator → parsed → PASS",
+  "adversarial": true,
+  "note": "",
+  "bundle": {
+    "invoice": {
+      "number": "INV-2026-0417",
+      "date": "2026-03-02",
+      "currency": "EUR",
+      "incoterm": "FOB",
+      "seller": "Nile Components Co.",
+      "buyer": "Rheinwerk Automation GmbH",
+      "total": "18,450.00",
+      "lines": [
+        {
+          "sku": "PMP-200",
+          "description": "Centrifugal pump 2 kW",
+          "qty": "10",
+          "unit": "PCS",
+          "unitPrice": "1,200.00",
+          "lineTotal": "12,000.00",
+          "hsCode": "8413.70"
+        },
+        {
+          "sku": "VLV-050",
+          "description": "Ball valve DN50",
+          "qty": "150",
+          "unit": "PCS",
+          "unitPrice": "35.00",
+          "lineTotal": "5250.00",
+          "hsCode": "8481.80"
+        },
+        {
+          "sku": "GSK-012",
+          "description": "Gasket set",
+          "qty": "400",
+          "unit": "PCS",
+          "unitPrice": "3.00",
+          "lineTotal": "1200.00",
+          "hsCode": "8484.10"
+        }
+      ]
+    },
+    "packingList": {
+      "number": "PL-0417",
+      "date": "2026-03-04",
+      "invoiceRef": "INV-2026-0417",
+      "shipmentRef": "SHP-77-2026",
+      "totalPackages": "12",
+      "totalNetKg": "1840.000",
+      "totalGrossKg": "1990.000",
+      "lines": [
+        {
+          "sku": "PMP-200",
+          "qty": "10",
+          "unit": "PCS",
+          "packages": "10",
+          "netKg": "1500.000",
+          "grossKg": "1600.000",
+          "hsCode": "8413.70"
+        },
+        {
+          "sku": "VLV-050",
+          "qty": "150",
+          "unit": "PCS",
+          "packages": "1",
+          "netKg": "300.000",
+          "grossKg": "340.000",
+          "hsCode": "8481.80"
+        },
+        {
+          "sku": "GSK-012",
+          "qty": "400",
+          "unit": "PCS",
+          "packages": "1",
+          "netKg": "40.000",
+          "grossKg": "50.000",
+          "hsCode": "8484.10"
+        }
+      ]
+    },
+    "billOfLading": {
+      "number": "MSKU-99120034",
+      "date": "2026-03-09",
+      "shipmentRef": "SHP-77-2026",
+      "shipper": "Nile Components Co.",
+      "consignee": "Rheinwerk Automation GmbH",
+      "packages": "12",
+      "grossKg": "1990.000",
+      "portOfLoading": "EGALY",
+      "portOfDischarge": "DEHAM"
+    }
+  },
+  "expect": []
+}

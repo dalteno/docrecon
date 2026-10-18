@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 4,
+    "WARNING": 2,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R01",
+      "code": "PACKING_INVOICE_REF",
+      "severity": "BLOCKER",
+      "key": "invoiceRef",
+      "field": "invoiceRef",
+      "expected": "INV-2026-0417",
+      "actual": "INV-X",
+      "reason": "Packing list references invoice INV-X, invoice number is INV-2026-0417.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    },
+    {
+      "rule": "R05",
+      "code": "QTY_MISMATCH",
+      "severity": "BLOCKER",
+      "key": "VLV-050",
+      "field": "qty",
+      "expected": "150.000",
+      "actual": "140.000",
+      "reason": "SKU VLV-050: invoiced 150.000, packed 140.000.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    },
+    {
+      "rule": "R06",
+      "code": "LINE_TOTAL_ARITHMETIC",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "lineTotal",
+      "expected": "1200.00",
+      "actual": "1210.00",
+      "reason": "400.000 × 3.00 = 1200.00, invoice says 1210.00.",
+      "documents": [
+        "invoice"
+      ]
+    },
+    {
+      "rule": "R07",
+      "code": "INVOICE_TOTAL_ARITHMETIC",
+      "severity": "BLOCKER",
+      "key": "invoice",
+      "field": "total",
+      "expected": "18460.00",
+      "actual": "18450.00",
+      "reason": "Line totals sum to 18460.00, invoice total is 18450.00.",
+      "documents": [
+        "invoice"
+      ]
+    },
+    {
+      "rule": "R12",
+      "code": "DATE_ORDER",
+      "severity": "WARNING",
+      "key": "packing>bl",
+      "field": "date",
+      "expected": "packing ≤ shipped on board",
+      "actual": "2026-03-04 > 2026-03-01",
+      "reason": "Packing list (2026-03-04) is dated after shipped-on-board (2026-03-01).",
+      "documents": [
+        "packingList",
+        "billOfLading"
+      ]
+    },
+    {
+      "rule": "R17",
+      "code": "CONSIGNEE_MISMATCH",
+      "severity": "WARNING",
+      "key": "consignee",
+      "field": "consignee",
+      "expected": "Rheinwerk Automation GmbH",
+      "actual": "Other Co",
+      "reason": "BL consignee \"Other Co\" does not match invoice buyer \"Rheinwerk Automation GmbH\" after normalisation (RHEINWERK AUTOMATION ≠ OTHER).",
+      "documents": [
+        "invoice",
+        "billOfLading"
+      ]
+    }
+  ]
+}

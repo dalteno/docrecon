@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R14",
+      "code": "HS_CODE_CONFLICT",
+      "severity": "WARNING",
+      "key": "VLV-050",
+      "field": "hsCode",
+      "expected": "848180",
+      "actual": "848190",
+      "reason": "SKU VLV-050: HS 848180 on invoice, 848190 on packing list.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R06",
+      "code": "LINE_TOTAL_ARITHMETIC",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "lineTotal",
+      "expected": "1200.00",
+      "actual": "1200.02",
+      "reason": "400.000 × 3.00 = 1200.00, invoice says 1200.02.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

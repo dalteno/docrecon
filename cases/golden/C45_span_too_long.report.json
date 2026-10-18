@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R12",
+      "code": "DATE_ORDER",
+      "severity": "WARNING",
+      "key": "span",
+      "field": "date",
+      "expected": "≤ 60 days",
+      "actual": "61 days",
+      "reason": "61 days between invoice and shipped-on-board exceeds 60.",
+      "documents": [
+        "invoice",
+        "billOfLading"
+      ]
+    }
+  ]
+}

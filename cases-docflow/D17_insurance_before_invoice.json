@@ -1,0 +1,52 @@
+{
+  "id": "D17_insurance_before_invoice",
+  "title": "Insurance approval before the invoice exists → F09",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "INSURANCE_CERT",
+      "version": 1,
+      "sha": "sha-INSURANCE_CERT-v1",
+      "payload": {
+        "policyNo": "MAR-2026-1190",
+        "coveredValue": "18450.00",
+        "currency": "EUR",
+        "insurer": "Delta Marine"
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "INSURANCE_CERT",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "AWAITING_APPROVAL",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F09|INSURANCE_CERT"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 1,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

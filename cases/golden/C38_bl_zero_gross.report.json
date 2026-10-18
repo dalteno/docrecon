@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R16",
+      "code": "NON_POSITIVE_VALUE",
+      "severity": "BLOCKER",
+      "key": "billOfLading:grossKg",
+      "field": "grossKg",
+      "expected": "> 0",
+      "actual": "0.000",
+      "reason": "Bill of lading gross weight is non-positive.",
+      "documents": [
+        "billOfLading"
+      ]
+    }
+  ]
+}

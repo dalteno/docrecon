@@ -1,0 +1,219 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 2,
+    "missing": 3
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "EXTRACTION_FAILED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": [
+        "seals"
+      ],
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 11,
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "EXTRACTION_FAILED",
+      "about": "BILL_OF_LADING",
+      "reason": "missing: seals"
+    }
+  ],
+  "rejected": [],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1"
+    },
+    {
+      "seq": 6,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 7,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 8,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-bl-noseals"
+    },
+    {
+      "seq": 10,
+      "type": "ExtractionFailed",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "missing": [
+        "seals"
+      ],
+      "rule": "F04"
+    },
+    {
+      "seq": 11,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "EXTRACTION_FAILED",
+      "about": "BILL_OF_LADING",
+      "reason": "missing: seals"
+    }
+  ]
+}

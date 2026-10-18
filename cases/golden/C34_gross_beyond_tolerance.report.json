@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R09",
+      "code": "GROSS_WEIGHT_BL_VS_PACKING",
+      "severity": "WARNING",
+      "key": "grossKg",
+      "field": "grossKg",
+      "expected": "1990.000",
+      "actual": "2031.000",
+      "reason": "BL gross 2031.000 kg vs packing 1990.000 kg exceeds 2 % tolerance.",
+      "documents": [
+        "packingList",
+        "billOfLading"
+      ]
+    }
+  ]
+}

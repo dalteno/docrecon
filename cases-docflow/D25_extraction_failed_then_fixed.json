@@ -1,0 +1,129 @@
+{
+  "id": "D25_extraction_failed_then_fixed",
+  "title": "Invoice without buyer → extraction failed (F04 on approve); v2 complete → approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-inv-nobuyer",
+      "payload": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "incoterm": "FOB",
+        "seller": "Nile Components Co.",
+        "buyer": "",
+        "total": "18450.00",
+        "lines": [
+          {
+            "sku": "PMP-200",
+            "qty": "10",
+            "unit": "PCS",
+            "unitPrice": "1200.00",
+            "lineTotal": "12000.00",
+            "hsCode": "8413.70"
+          },
+          {
+            "sku": "VLV-050",
+            "qty": "150",
+            "unit": "PCS",
+            "unitPrice": "35.00",
+            "lineTotal": "5250.00",
+            "hsCode": "8481.80"
+          },
+          {
+            "sku": "GSK-012",
+            "qty": "400",
+            "unit": "PCS",
+            "unitPrice": "3.00",
+            "lineTotal": "1200.00",
+            "hsCode": "8484.10"
+          }
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "COMMERCIAL_INVOICE",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "version": 2,
+      "sha": "sha-COMMERCIAL_INVOICE-v2",
+      "payload": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "incoterm": "FOB",
+        "seller": "Nile Components Co.",
+        "buyer": "Rheinwerk Automation GmbH",
+        "total": "18450.00",
+        "lines": [
+          {
+            "sku": "PMP-200",
+            "qty": "10",
+            "unit": "PCS",
+            "unitPrice": "1200.00",
+            "lineTotal": "12000.00",
+            "hsCode": "8413.70"
+          },
+          {
+            "sku": "VLV-050",
+            "qty": "150",
+            "unit": "PCS",
+            "unitPrice": "35.00",
+            "lineTotal": "5250.00",
+            "hsCode": "8481.80"
+          },
+          {
+            "sku": "GSK-012",
+            "qty": "400",
+            "unit": "PCS",
+            "unitPrice": "3.00",
+            "lineTotal": "1200.00",
+            "hsCode": "8484.10"
+          }
+        ]
+      },
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "COMMERCIAL_INVOICE",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "APPROVED",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F04|COMMERCIAL_INVOICE"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 2,
+    "integrationQueued": 1,
+    "integrationAcked": 0
+  }
+}

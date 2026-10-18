@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R16",
+      "code": "NON_POSITIVE_VALUE",
+      "severity": "BLOCKER",
+      "key": "invoice:GSK-012:unitPrice",
+      "field": "unitPrice",
+      "expected": "> 0",
+      "actual": "0.00",
+      "reason": "invoice line 3 (GSK-012) has a non-positive unitPrice.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

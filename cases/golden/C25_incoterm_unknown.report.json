@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "PASS",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 0,
+    "INFO": 1
+  },
+  "findings": [
+    {
+      "rule": "R18",
+      "code": "INCOTERM_UNKNOWN",
+      "severity": "INFO",
+      "key": "invoice",
+      "field": "incoterm",
+      "expected": "EXW/FCA/FAS/FOB/CFR/CIF/CPT/CIP/DAP/DPU/DDP",
+      "actual": "FOB Alexandria",
+      "reason": "Incoterm \"FOB Alexandria\" is not an Incoterms 2020 code.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

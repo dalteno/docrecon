@@ -1,0 +1,236 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 1,
+    "missing": 4
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "APPROVED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|PACKING_LIST|v1",
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [
+    {
+      "seq": 11,
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "key": "SHP-77-2026|PACKING_LIST|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_PACKING_LIST",
+      "fields": {
+        "number": "PL-0417",
+        "invoiceRef": "INV-2026-0417",
+        "totalPackages": "12",
+        "totalGrossKg": "1990.000"
+      },
+      "status": "QUEUED",
+      "ackedAt": null
+    }
+  ],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 9,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "PACKING_LIST",
+      "rule": "F01",
+      "reason": "FINANCE may not act on PACKING_LIST; assigned role is WAREHOUSE"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1"
+    },
+    {
+      "seq": 6,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 7,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 8,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 9,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "PACKING_LIST",
+      "rule": "F01",
+      "reason": "FINANCE may not act on PACKING_LIST; assigned role is WAREHOUSE"
+    },
+    {
+      "seq": 10,
+      "type": "ApprovalGranted",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 11,
+      "type": "IntegrationQueued",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "key": "SHP-77-2026|PACKING_LIST|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_PACKING_LIST",
+      "rule": "F05"
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "id": "D19_inspection_required",
+  "title": "requiresInspection → six integrated is not enough; closes only after the inspection certificate",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026",
+    "requiresInspection": true
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1",
+      "payload": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "incoterm": "FOB",
+        "seller": "Nile Components Co.",
+        "buyer": "Rheinwerk Automation GmbH",
+        "total": "18450.00",
+        "lines": [
+          {
+            "sku": "PMP-200",
+            "qty": "10",
+            "unit": "PCS",
+            "unitPrice": "1200.00",
+            "lineTotal": "12000.00",
+            "hsCode": "8413.70"
+          },
+          {
+            "sku": "VLV-050",
+            "qty": "150",
+            "unit": "PCS",
+            "unitPrice": "35.00",
+            "lineTotal": "5250.00",
+            "hsCode": "8481.80"
+          },
+          {
+            "sku": "GSK-012",
+            "qty": "400",
+            "unit": "PCS",
+            "unitPrice": "3.00",
+            "lineTotal": "1200.00",
+            "hsCode": "8484.10"
+          }
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1",
+      "payload": {
+        "number": "PL-0417",
+        "date": "2026-03-04",
+        "invoiceRef": "INV-2026-0417",
+        "shipmentRef": "SHP-77-2026",
+        "totalPackages": "12",
+        "totalNetKg": "1840.000",
+        "totalGrossKg": "1990.000",
+        "lines": [
+          {
+            "sku": "PMP-200",
+            "qty": "10",
+            "unit": "PCS",
+            "packages": "10",
+            "netKg": "1500.000",
+            "grossKg": "1600.000",
+            "hsCode": "8413.70"
+          },
+          {
+            "sku": "VLV-050",
+            "qty": "150",
+            "unit": "PCS",
+            "packages": "1",
+            "netKg": "300.000",
+            "grossKg": "340.000",
+            "hsCode": "8481.80"
+          },
+          {
+            "sku": "GSK-012",
+            "qty": "400",
+            "unit": "PCS",
+            "packages": "1",
+            "netKg": "40.000",
+            "grossKg": "50.000",
+            "hsCode": "8484.10"
+          }
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-BILL_OF_LADING-v1",
+      "payload": {
+        "number": "MSKU-99120034",
+        "date": "2026-03-09",
+        "shipmentRef": "SHP-77-2026",
+        "shipper": "Nile Components Co.",
+        "consignee": "Rheinwerk Automation GmbH",
+        "packages": "12",
+        "grossKg": "1990.000",
+        "portOfLoading": "EGALY",
+        "portOfDischarge": "DEHAM",
+        "containers": [
+          "MSKU1234567"
+        ],
+        "seals": [
+          "SL-778812"
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+      "payload": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417",
+        "issuer": "Chamber of Commerce Alexandria"
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "CUSTOMS_ENTRY",
+      "version": 1,
+      "sha": "sha-CUSTOMS_ENTRY-v1",
+      "payload": {
+        "entryNo": "CE-ALY-2026-5531",
+        "declaredValue": "18450.00",
+        "currency": "EUR",
+        "hsCodes": [
+          "841370",
+          "848180",
+          "848410"
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "INSURANCE_CERT",
+      "version": 1,
+      "sha": "sha-INSURANCE_CERT-v1",
+      "payload": {
+        "policyNo": "MAR-2026-1190",
+        "coveredValue": "18450.00",
+        "currency": "EUR",
+        "insurer": "Delta Marine"
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "COMMERCIAL_INVOICE",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "PACKING_LIST",
+      "role": "WAREHOUSE",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "BILL_OF_LADING",
+      "role": "LOGISTICS",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "CUSTOMS_ENTRY",
+      "role": "CUSTOMS_BROKER",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "INSURANCE_CERT",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|PACKING_LIST|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|BILL_OF_LADING|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|INSURANCE_CERT|v1",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "RECEIVE",
+      "type": "INSPECTION_CERT",
+      "version": 1,
+      "sha": "sha-INSPECTION_CERT-v1",
+      "payload": {
+        "certNo": "INS-2026-0421",
+        "result": "CONFORM"
+      },
+      "at": "2026-03-13"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "INSPECTION_CERT",
+      "role": "QUALITY",
+      "at": "2026-03-13"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|INSPECTION_CERT|v1",
+      "at": "2026-03-14"
+    }
+  ],
+  "expect": {
+    "status": "CLOSED",
+    "documents": {
+      "COMMERCIAL_INVOICE": "INTEGRATED",
+      "PACKING_LIST": "INTEGRATED",
+      "BILL_OF_LADING": "INTEGRATED",
+      "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+      "CUSTOMS_ENTRY": "INTEGRATED",
+      "INSURANCE_CERT": "INTEGRATED",
+      "INSPECTION_CERT": "INTEGRATED"
+    },
+    "reconciliation": "PASS",
+    "rejected": [],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 7,
+    "integrationQueued": 7,
+    "integrationAcked": 7
+  }
+}

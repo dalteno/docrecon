@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R10",
+      "code": "NET_GT_GROSS",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "netKg",
+      "expected": "≤ gross 50.000",
+      "actual": "55.000",
+      "reason": "Packing line GSK-012: net 55.000 kg exceeds gross 50.000 kg.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

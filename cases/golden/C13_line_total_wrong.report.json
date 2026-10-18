@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R06",
+      "code": "LINE_TOTAL_ARITHMETIC",
+      "severity": "BLOCKER",
+      "key": "VLV-050",
+      "field": "lineTotal",
+      "expected": "5250.00",
+      "actual": "5200.00",
+      "reason": "150.000 × 35.00 = 5250.00, invoice says 5200.00.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

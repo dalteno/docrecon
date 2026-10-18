@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R12",
+      "code": "DATE_ORDER",
+      "severity": "WARNING",
+      "key": "invoice>packing",
+      "field": "date",
+      "expected": "invoice ≤ packing",
+      "actual": "2026-03-06 > 2026-03-04",
+      "reason": "Invoice (2026-03-06) is dated after the packing list (2026-03-04).",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

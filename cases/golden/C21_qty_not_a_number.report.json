@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "invoice:PMP-200:qty",
+      "field": "qty",
+      "expected": "number",
+      "actual": "ten",
+      "reason": "Invoice line PMP-200: qty is not a number.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

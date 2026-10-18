@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R11",
+      "code": "PACKAGE_COUNT_BL_VS_PACKING",
+      "severity": "WARNING",
+      "key": "packages",
+      "field": "packages",
+      "expected": "12",
+      "actual": "11",
+      "reason": "BL declares 11 packages, packing list 12.",
+      "documents": [
+        "packingList",
+        "billOfLading"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R05",
+      "code": "QTY_MISMATCH",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "qty",
+      "expected": "400.000",
+      "actual": "388.000",
+      "reason": "SKU GSK-012: invoiced 400.000, packed 388.000.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R01",
+      "code": "PACKING_INVOICE_REF",
+      "severity": "BLOCKER",
+      "key": "invoiceRef",
+      "field": "invoiceRef",
+      "expected": "INV-2026-0417",
+      "actual": "INV-2026-0418",
+      "reason": "Packing list references invoice INV-2026-0418, invoice number is INV-2026-0417.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

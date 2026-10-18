@@ -1,0 +1,86 @@
+{
+  "id": "D37_ack_key_from_other_dossier",
+  "title": "Key of another dossier → F06",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1",
+      "payload": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "incoterm": "FOB",
+        "seller": "Nile Components Co.",
+        "buyer": "Rheinwerk Automation GmbH",
+        "total": "18450.00",
+        "lines": [
+          {
+            "sku": "PMP-200",
+            "qty": "10",
+            "unit": "PCS",
+            "unitPrice": "1200.00",
+            "lineTotal": "12000.00",
+            "hsCode": "8413.70"
+          },
+          {
+            "sku": "VLV-050",
+            "qty": "150",
+            "unit": "PCS",
+            "unitPrice": "35.00",
+            "lineTotal": "5250.00",
+            "hsCode": "8481.80"
+          },
+          {
+            "sku": "GSK-012",
+            "qty": "400",
+            "unit": "PCS",
+            "unitPrice": "3.00",
+            "lineTotal": "1200.00",
+            "hsCode": "8484.10"
+          }
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "APPROVE",
+      "type": "COMMERCIAL_INVOICE",
+      "role": "FINANCE",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-78-2026|COMMERCIAL_INVOICE|v1",
+      "at": "2026-03-12"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "APPROVED",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F06|INTEGRATION_ACK"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 1,
+    "integrationQueued": 1,
+    "integrationAcked": 0
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 0,
+    "missing": 5
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "APPROVED",
+      "version": 2,
+      "receivedAt": "2026-03-12",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v2",
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [
+    {
+      "seq": 15,
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 2,
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v2",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "fields": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417"
+      },
+      "status": "QUEUED",
+      "ackedAt": null
+    }
+  ],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 7,
+      "at": "2026-03-11",
+      "role": "INTAKE",
+      "template": "DOCUMENT_REJECTED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "CUSTOMS_BROKER: issuer stamp missing — resubmit as v2"
+    },
+    {
+      "seq": 13,
+      "at": "2026-03-12",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v2 awaiting your approval"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 5,
+      "at": "2026-03-11",
+      "cmd": "REJECT",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "rule": "F14",
+      "reason": "rejection requires a reason"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "CERTIFICATE_OF_ORIGIN",
+      "rule": "F03",
+      "reason": "CERTIFICATE_OF_ORIGIN v1 was rejected; a new version is required"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "fields": [
+        "number",
+        "originCountry",
+        "invoiceRef"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "REJECT",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "rule": "F14",
+      "reason": "rejection requires a reason"
+    },
+    {
+      "seq": 6,
+      "type": "ApprovalRejected",
+      "at": "2026-03-11",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "role": "CUSTOMS_BROKER",
+      "reason": "issuer stamp missing"
+    },
+    {
+      "seq": 7,
+      "type": "NotificationQueued",
+      "at": "2026-03-11",
+      "role": "INTAKE",
+      "template": "DOCUMENT_REJECTED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "CUSTOMS_BROKER: issuer stamp missing — resubmit as v2"
+    },
+    {
+      "seq": 8,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "rule": "F03",
+      "reason": "CERTIFICATE_OF_ORIGIN v1 was rejected; a new version is required"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentSuperseded",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "oldVersion": 1,
+      "newVersion": 2,
+      "previousStatus": "REJECTED",
+      "rule": "F03"
+    },
+    {
+      "seq": 10,
+      "type": "DocumentReceived",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 2,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v2"
+    },
+    {
+      "seq": 11,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "fields": [
+        "number",
+        "originCountry",
+        "invoiceRef"
+      ]
+    },
+    {
+      "seq": 12,
+      "type": "Routed",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 13,
+      "type": "NotificationQueued",
+      "at": "2026-03-12",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v2 awaiting your approval"
+    },
+    {
+      "seq": 14,
+      "type": "ApprovalGranted",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 2,
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 15,
+      "type": "IntegrationQueued",
+      "at": "2026-03-12",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v2",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "rule": "F05"
+    }
+  ]
+}

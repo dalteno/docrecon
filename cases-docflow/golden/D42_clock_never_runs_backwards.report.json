@@ -1,0 +1,210 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 0,
+    "missing": 5
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "APPROVED",
+      "version": 1,
+      "receivedAt": "2026-03-12",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [
+    {
+      "seq": 8,
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_COMMERCIAL_INVOICE",
+      "fields": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "total": "18450.00",
+        "buyer": "Rheinwerk Automation GmbH"
+      },
+      "status": "QUEUED",
+      "ackedAt": null
+    }
+  ],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-12",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 5,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "COMMERCIAL_INVOICE",
+      "rule": "F17",
+      "reason": "command dated 2026-03-11 is before the dossier clock 2026-03-12"
+    },
+    {
+      "seq": 6,
+      "at": "2026-03-11",
+      "cmd": "TICK",
+      "type": null,
+      "rule": "F17",
+      "reason": "command dated 2026-03-11 is before the dossier clock 2026-03-12"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-12",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "COMMERCIAL_INVOICE",
+      "rule": "F17",
+      "reason": "command dated 2026-03-11 is before the dossier clock 2026-03-12"
+    },
+    {
+      "seq": 6,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "TICK",
+      "document": null,
+      "rule": "F17",
+      "reason": "command dated 2026-03-11 is before the dossier clock 2026-03-12"
+    },
+    {
+      "seq": 7,
+      "type": "ApprovalGranted",
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "role": "FINANCE"
+    },
+    {
+      "seq": 8,
+      "type": "IntegrationQueued",
+      "at": "2026-03-12",
+      "document": "COMMERCIAL_INVOICE",
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_COMMERCIAL_INVOICE",
+      "rule": "F05"
+    }
+  ]
+}

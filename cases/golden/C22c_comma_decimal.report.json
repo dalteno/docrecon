@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "invoice:GSK-012:qty",
+      "field": "qty",
+      "expected": "number",
+      "actual": "1,5",
+      "reason": "Invoice line GSK-012: qty is not a number.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

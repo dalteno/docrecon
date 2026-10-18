@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R07",
+      "code": "INVOICE_TOTAL_ARITHMETIC",
+      "severity": "BLOCKER",
+      "key": "invoice",
+      "field": "total",
+      "expected": "18450.00",
+      "actual": "18500.00",
+      "reason": "Line totals sum to 18450.00, invoice total is 18500.00.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

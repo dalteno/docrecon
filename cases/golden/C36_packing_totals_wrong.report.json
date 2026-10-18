@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 3,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R11",
+      "code": "PACKAGE_COUNT_BL_VS_PACKING",
+      "severity": "WARNING",
+      "key": "packages",
+      "field": "packages",
+      "expected": "13",
+      "actual": "12",
+      "reason": "BL declares 12 packages, packing list 13.",
+      "documents": [
+        "packingList",
+        "billOfLading"
+      ]
+    },
+    {
+      "rule": "R20",
+      "code": "PACKING_TOTALS_ARITHMETIC",
+      "severity": "WARNING",
+      "key": "totalGrossKg",
+      "field": "totalGrossKg",
+      "expected": "1990.000",
+      "actual": "2000.000",
+      "reason": "Packing list declares totalGrossKg 2000.000, lines sum to 1990.000.",
+      "documents": [
+        "packingList"
+      ]
+    },
+    {
+      "rule": "R20",
+      "code": "PACKING_TOTALS_ARITHMETIC",
+      "severity": "WARNING",
+      "key": "totalPackages",
+      "field": "totalPackages",
+      "expected": "12",
+      "actual": "13",
+      "reason": "Packing list declares totalPackages 13, lines sum to 12.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

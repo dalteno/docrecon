@@ -1,0 +1,30 @@
+{
+  "id": "D41_empty_dossier",
+  "title": "No commands → OPEN, everything MISSING",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 0,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

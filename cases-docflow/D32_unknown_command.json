@@ -1,0 +1,37 @@
+{
+  "id": "D32_unknown_command",
+  "title": "Unknown verb → F16",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "FOO",
+      "at": "2026-03-10"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F16|FOO"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 0,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "D28_approve_missing_document",
+  "title": "Approving a document that never arrived → F04",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "APPROVE",
+      "type": "PACKING_LIST",
+      "role": "WAREHOUSE",
+      "at": "2026-03-10"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F04|PACKING_LIST"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 0,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

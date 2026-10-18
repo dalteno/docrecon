@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R02",
+      "code": "BL_SHIPMENT_REF",
+      "severity": "BLOCKER",
+      "key": "shipmentRef",
+      "field": "shipmentRef",
+      "expected": "SHP-77-2026",
+      "actual": "SHP-78-2026",
+      "reason": "Packing list shipment ref SHP-77-2026, bill of lading shipment ref SHP-78-2026.",
+      "documents": [
+        "packingList",
+        "billOfLading"
+      ]
+    }
+  ]
+}

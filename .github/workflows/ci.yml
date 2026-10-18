@@ -1,28 +1,33 @@
-name: .NET CI / dotnet test
-
+name: ci
 on:
-  push:
-    branches: [ main ]
+  push: { branches: [main] }
   pull_request:
-    branches: [ main ]
-
 jobs:
-  build-and-test:
+  js:
+    name: JS engine · shared cases · golden
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '10.x'
-        
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
-    - name: Run dotnet test
-      run: dotnet test --configuration Release --no-build --verbosity normal
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node cases/generate.mjs && node cases-docflow/generate.mjs
+      - name: cases must be committed exactly as generated
+        run: git diff --exit-code -- cases cases-docflow
+      - run: node --test web/tests/cases.test.mjs web/tests/docflow.test.mjs web/tests/formmerge.test.mjs
+      - name: golden reports must exist for every case (parity gate)
+        run: |
+          test "$(ls cases/golden/*.report.json | wc -l)" = "$(ls cases/*.json | wc -l)"
+          test "$(ls cases-docflow/golden/*.report.json | wc -l)" = "$(ls cases-docflow/*.json | wc -l)"
+  dotnet:
+    name: .NET library · xUnit · parity with golden
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: 10.0.x }
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release
+      - run: dotnet test --no-build -c Release --logger "trx;LogFileName=results.trx"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: test-results, path: "**/results.trx" }

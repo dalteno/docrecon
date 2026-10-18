@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R05",
+      "code": "QTY_MISMATCH",
+      "severity": "BLOCKER",
+      "key": "VLV-050",
+      "field": "qty",
+      "expected": "150.000",
+      "actual": "140.000",
+      "reason": "SKU VLV-050: invoiced 150.000, packed 140.000.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

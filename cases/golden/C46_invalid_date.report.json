@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "invoice.date",
+      "field": "date",
+      "expected": "YYYY-MM-DD",
+      "actual": "2026-02-30",
+      "reason": "Invoice date is not a valid ISO date.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

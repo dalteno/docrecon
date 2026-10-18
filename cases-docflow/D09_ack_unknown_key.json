@@ -1,0 +1,38 @@
+{
+  "id": "D09_ack_unknown_key",
+  "title": "ERP acknowledges an unknown key → F06",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "INTEGRATION_ACK",
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "at": "2026-03-10"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "MISSING",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [
+      "F06|INTEGRATION_ACK"
+    ],
+    "ignored": [],
+    "slaBreached": [],
+    "slaBreaches": 0,
+    "notifications": 0,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

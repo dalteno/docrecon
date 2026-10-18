@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R15",
+      "code": "DUPLICATE_SKU_CONFLICT",
+      "severity": "WARNING",
+      "key": "GSK-012",
+      "field": "sku",
+      "expected": "one price/HS for GSK-012",
+      "actual": "3.00/848410 vs 3.50/848410",
+      "reason": "SKU GSK-012 appears more than once on the invoice with conflicting unit price or HS code.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "D21_sla_breach_once",
+  "title": "BL (SLA 1 day): no breach at +1, breach at +2, never a second one",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+    "id": "SHP-77-2026"
+  },
+  "commands": [
+    {
+      "cmd": "RECEIVE",
+      "type": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-BILL_OF_LADING-v1",
+      "payload": {
+        "number": "MSKU-99120034",
+        "date": "2026-03-09",
+        "shipmentRef": "SHP-77-2026",
+        "shipper": "Nile Components Co.",
+        "consignee": "Rheinwerk Automation GmbH",
+        "packages": "12",
+        "grossKg": "1990.000",
+        "portOfLoading": "EGALY",
+        "portOfDischarge": "DEHAM",
+        "containers": [
+          "MSKU1234567"
+        ],
+        "seals": [
+          "SL-778812"
+        ]
+      },
+      "at": "2026-03-10"
+    },
+    {
+      "cmd": "TICK",
+      "at": "2026-03-11"
+    },
+    {
+      "cmd": "TICK",
+      "at": "2026-03-12"
+    },
+    {
+      "cmd": "TICK",
+      "at": "2026-03-13"
+    }
+  ],
+  "expect": {
+    "status": "OPEN",
+    "documents": {
+      "COMMERCIAL_INVOICE": "MISSING",
+      "PACKING_LIST": "MISSING",
+      "BILL_OF_LADING": "AWAITING_APPROVAL",
+      "CERTIFICATE_OF_ORIGIN": "MISSING",
+      "CUSTOMS_ENTRY": "MISSING",
+      "INSURANCE_CERT": "MISSING",
+      "INSPECTION_CERT": "MISSING"
+    },
+    "reconciliation": null,
+    "rejected": [],
+    "ignored": [],
+    "slaBreached": [
+      "BILL_OF_LADING"
+    ],
+    "slaBreaches": 1,
+    "notifications": 2,
+    "integrationQueued": 0,
+    "integrationAcked": 0
+  }
+}

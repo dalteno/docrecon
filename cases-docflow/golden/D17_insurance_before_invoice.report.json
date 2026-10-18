@@ -1,0 +1,154 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 1,
+    "missing": 5
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "INSURANCE_CERT",
+      "reason": "v1 awaiting your approval"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 5,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "INSURANCE_CERT",
+      "rule": "F09",
+      "reason": "invoice must be received and extracted before insurance can be approved"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "version": 1,
+      "sha": "sha-INSURANCE_CERT-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "fields": [
+        "policyNo",
+        "coveredValue",
+        "currency"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "INSURANCE_CERT",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "INSURANCE_CERT",
+      "rule": "F09",
+      "reason": "invoice must be received and extracted before insurance can be approved"
+    }
+  ]
+}

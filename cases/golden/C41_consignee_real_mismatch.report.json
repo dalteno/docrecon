@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 1,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R17",
+      "code": "CONSIGNEE_MISMATCH",
+      "severity": "WARNING",
+      "key": "consignee",
+      "field": "consignee",
+      "expected": "Rheinwerk Automation GmbH",
+      "actual": "Rheinwerk Trading GmbH",
+      "reason": "BL consignee \"Rheinwerk Trading GmbH\" does not match invoice buyer \"Rheinwerk Automation GmbH\" after normalisation (RHEINWERK AUTOMATION ≠ RHEINWERK TRADING).",
+      "documents": [
+        "invoice",
+        "billOfLading"
+      ]
+    }
+  ]
+}

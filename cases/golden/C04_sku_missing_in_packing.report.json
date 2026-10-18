@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R03",
+      "code": "LINE_MISSING_IN_PACKING",
+      "severity": "BLOCKER",
+      "key": "GSK-012",
+      "field": "sku",
+      "expected": "present on packing list",
+      "actual": "absent",
+      "reason": "Invoiced SKU GSK-012 is not on the packing list.",
+      "documents": [
+        "invoice",
+        "packingList"
+      ]
+    }
+  ]
+}

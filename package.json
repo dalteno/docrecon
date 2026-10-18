@@ -1,0 +1,14 @@
+{
+  "name": "@dalteno/docrecon",
+  "version": "1.0.0",
+  "description": "docrecon (document reconciliation) and docflow (dossier workflow) — deterministic engines in .NET 8 and JS, parity-tested on shared cases.",
+  "type": "module",
+  "main": "web/docrecon.js",
+  "scripts": {
+    "cases": "node cases/generate.mjs && node cases-docflow/generate.mjs",
+    "test": "node --test web/tests/cases.test.mjs web/tests/docflow.test.mjs web/tests/formmerge.test.mjs",
+    "golden": "node web/tests/write-golden.mjs && node web/tests/write-golden-docflow.mjs"
+  },
+  "license": "MIT",
+  "repository": "github:dalteno/docrecon"
+}

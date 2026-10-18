@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "status": "PASS",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 0,
+    "INFO": 2
+  },
+  "findings": [
+    {
+      "rule": "R13",
+      "code": "HS_CODE_FORMAT",
+      "severity": "INFO",
+      "key": "invoice:PMP-200",
+      "field": "hsCode",
+      "expected": "6–10 digits",
+      "actual": "84137",
+      "reason": "Invoice line PMP-200: HS code \"84137\" is not 6–10 digits.",
+      "documents": [
+        "invoice"
+      ]
+    },
+    {
+      "rule": "R13",
+      "code": "HS_CODE_FORMAT",
+      "severity": "INFO",
+      "key": "packingList:PMP-200",
+      "field": "hsCode",
+      "expected": "6–10 digits",
+      "actual": "84137",
+      "reason": "Packing line PMP-200: HS code \"84137\" is not 6–10 digits.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

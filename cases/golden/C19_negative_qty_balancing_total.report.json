@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 2,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R16",
+      "code": "NON_POSITIVE_VALUE",
+      "severity": "BLOCKER",
+      "key": "invoice:ADJ-001:qty",
+      "field": "qty",
+      "expected": "> 0",
+      "actual": "-1.000",
+      "reason": "invoice line 4 (ADJ-001) has a non-positive qty.",
+      "documents": [
+        "invoice"
+      ]
+    },
+    {
+      "rule": "R16",
+      "code": "NON_POSITIVE_VALUE",
+      "severity": "BLOCKER",
+      "key": "packingList:ADJ-001:qty",
+      "field": "qty",
+      "expected": "> 0",
+      "actual": "-1.000",
+      "reason": "packingList line 4 (ADJ-001) has a non-positive qty.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 21,
+  "summary": {
+    "BLOCKER": 1,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R08",
+      "code": "CURRENCY_MIXED",
+      "severity": "BLOCKER",
+      "key": "VLV-050",
+      "field": "currency",
+      "expected": "EUR",
+      "actual": "USD",
+      "reason": "Line VLV-050 is priced in USD but the invoice currency is EUR.",
+      "documents": [
+        "invoice"
+      ]
+    }
+  ]
+}

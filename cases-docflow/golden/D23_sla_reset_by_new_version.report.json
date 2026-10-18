@@ -1,0 +1,229 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 1,
+    "missing": 5
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 2,
+      "receivedAt": "2026-03-13",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 6,
+      "at": "2026-03-13",
+      "role": "LOGISTICS",
+      "template": "SLA_BREACH",
+      "about": "BILL_OF_LADING",
+      "reason": "3 days since receipt, SLA 1"
+    },
+    {
+      "seq": 12,
+      "at": "2026-03-13",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v2 awaiting your approval"
+    }
+  ],
+  "rejected": [],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-BILL_OF_LADING-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "fields": [
+        "number",
+        "shipmentRef",
+        "containers",
+        "seals"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "SlaBreached",
+      "at": "2026-03-13",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS",
+      "days": 3,
+      "slaDays": 1,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 6,
+      "type": "NotificationQueued",
+      "at": "2026-03-13",
+      "role": "LOGISTICS",
+      "template": "SLA_BREACH",
+      "about": "BILL_OF_LADING",
+      "reason": "3 days since receipt, SLA 1"
+    },
+    {
+      "seq": 7,
+      "type": "Tick",
+      "at": "2026-03-13"
+    },
+    {
+      "seq": 8,
+      "type": "DocumentSuperseded",
+      "at": "2026-03-13",
+      "document": "BILL_OF_LADING",
+      "oldVersion": 1,
+      "newVersion": 2,
+      "previousStatus": "AWAITING_APPROVAL",
+      "rule": "F03"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentReceived",
+      "at": "2026-03-13",
+      "document": "BILL_OF_LADING",
+      "version": 2,
+      "sha": "sha-BILL_OF_LADING-v2"
+    },
+    {
+      "seq": 10,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-13",
+      "document": "BILL_OF_LADING",
+      "fields": [
+        "number",
+        "shipmentRef",
+        "containers",
+        "seals"
+      ]
+    },
+    {
+      "seq": 11,
+      "type": "Routed",
+      "at": "2026-03-13",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 12,
+      "type": "NotificationQueued",
+      "at": "2026-03-13",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v2 awaiting your approval"
+    },
+    {
+      "seq": 13,
+      "type": "Tick",
+      "at": "2026-03-14"
+    }
+  ]
+}

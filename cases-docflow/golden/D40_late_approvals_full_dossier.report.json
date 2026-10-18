@@ -1,0 +1,785 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "CLOSED",
+  "closedAt": "2026-03-16",
+  "progress": {
+    "required": 6,
+    "integrated": 6,
+    "awaiting": 0,
+    "missing": 0
+  },
+  "reconciliation": {
+    "at": "2026-03-10",
+    "status": "PASS",
+    "blockers": 0,
+    "warnings": 0,
+    "findings": [],
+    "inputVersions": "COMMERCIAL_INVOICE@1,PACKING_LIST@1,BILL_OF_LADING@1"
+  },
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "slaBreached": true
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|PACKING_LIST|v1",
+      "slaBreached": true
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|BILL_OF_LADING|v1",
+      "slaBreached": true
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "slaBreached": true
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "INTEGRATED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|INSURANCE_CERT|v1",
+      "slaBreached": true
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [
+    {
+      "seq": 37,
+      "at": "2026-03-15",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_COMMERCIAL_INVOICE",
+      "fields": {
+        "number": "INV-2026-0417",
+        "date": "2026-03-02",
+        "currency": "EUR",
+        "total": "18450.00",
+        "buyer": "Rheinwerk Automation GmbH"
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    },
+    {
+      "seq": 39,
+      "at": "2026-03-15",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "key": "SHP-77-2026|PACKING_LIST|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_PACKING_LIST",
+      "fields": {
+        "number": "PL-0417",
+        "invoiceRef": "INV-2026-0417",
+        "totalPackages": "12",
+        "totalGrossKg": "1990.000"
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    },
+    {
+      "seq": 41,
+      "at": "2026-03-15",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "key": "SHP-77-2026|BILL_OF_LADING|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_BILL_OF_LADING",
+      "fields": {
+        "number": "MSKU-99120034",
+        "shipmentRef": "SHP-77-2026",
+        "containers": [
+          "MSKU1234567"
+        ],
+        "seals": [
+          "SL-778812"
+        ]
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    },
+    {
+      "seq": 43,
+      "at": "2026-03-15",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "fields": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417"
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    },
+    {
+      "seq": 45,
+      "at": "2026-03-15",
+      "document": "CUSTOMS_ENTRY",
+      "version": 1,
+      "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CUSTOMS_ENTRY",
+      "fields": {
+        "entryNo": "CE-ALY-2026-5531",
+        "declaredValue": "18450.00",
+        "hsCodes": [
+          "841370",
+          "848180",
+          "848410"
+        ]
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    },
+    {
+      "seq": 47,
+      "at": "2026-03-15",
+      "document": "INSURANCE_CERT",
+      "version": 1,
+      "key": "SHP-77-2026|INSURANCE_CERT|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_INSURANCE_CERT",
+      "fields": {
+        "policyNo": "MAR-2026-1190",
+        "coveredValue": "18450.00",
+        "currency": "EUR"
+      },
+      "status": "ACKED",
+      "ackedAt": "2026-03-16"
+    }
+  ],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 12,
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 17,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 21,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 25,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "INSURANCE_CERT",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 27,
+      "at": "2026-03-15",
+      "role": "FINANCE",
+      "template": "SLA_BREACH",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "5 days since receipt, SLA 2"
+    },
+    {
+      "seq": 29,
+      "at": "2026-03-15",
+      "role": "WAREHOUSE",
+      "template": "SLA_BREACH",
+      "about": "PACKING_LIST",
+      "reason": "5 days since receipt, SLA 2"
+    },
+    {
+      "seq": 31,
+      "at": "2026-03-15",
+      "role": "LOGISTICS",
+      "template": "SLA_BREACH",
+      "about": "BILL_OF_LADING",
+      "reason": "5 days since receipt, SLA 1"
+    },
+    {
+      "seq": 33,
+      "at": "2026-03-15",
+      "role": "CUSTOMS_BROKER",
+      "template": "SLA_BREACH",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "5 days since receipt, SLA 3"
+    },
+    {
+      "seq": 35,
+      "at": "2026-03-15",
+      "role": "FINANCE",
+      "template": "SLA_BREACH",
+      "about": "INSURANCE_CERT",
+      "reason": "5 days since receipt, SLA 3"
+    }
+  ],
+  "rejected": [],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1"
+    },
+    {
+      "seq": 6,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 7,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 8,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-BILL_OF_LADING-v1"
+    },
+    {
+      "seq": 10,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "fields": [
+        "number",
+        "shipmentRef",
+        "containers",
+        "seals"
+      ]
+    },
+    {
+      "seq": 11,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 12,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 13,
+      "type": "ReconciliationRun",
+      "at": "2026-03-10",
+      "status": "PASS",
+      "blockers": 0,
+      "warnings": 0,
+      "findings": [],
+      "rule": "F07"
+    },
+    {
+      "seq": 14,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1"
+    },
+    {
+      "seq": 15,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "fields": [
+        "number",
+        "originCountry",
+        "invoiceRef"
+      ]
+    },
+    {
+      "seq": 16,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 17,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 18,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "version": 1,
+      "sha": "sha-CUSTOMS_ENTRY-v1"
+    },
+    {
+      "seq": 19,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "fields": [
+        "entryNo",
+        "declaredValue",
+        "hsCodes"
+      ]
+    },
+    {
+      "seq": 20,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CUSTOMS_ENTRY",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 21,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 22,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "version": 1,
+      "sha": "sha-INSURANCE_CERT-v1"
+    },
+    {
+      "seq": 23,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "fields": [
+        "policyNo",
+        "coveredValue",
+        "currency"
+      ]
+    },
+    {
+      "seq": 24,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "INSURANCE_CERT",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 25,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "INSURANCE_CERT",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 26,
+      "type": "SlaBreached",
+      "at": "2026-03-15",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE",
+      "days": 5,
+      "slaDays": 2,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 27,
+      "type": "NotificationQueued",
+      "at": "2026-03-15",
+      "role": "FINANCE",
+      "template": "SLA_BREACH",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "5 days since receipt, SLA 2"
+    },
+    {
+      "seq": 28,
+      "type": "SlaBreached",
+      "at": "2026-03-15",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE",
+      "days": 5,
+      "slaDays": 2,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 29,
+      "type": "NotificationQueued",
+      "at": "2026-03-15",
+      "role": "WAREHOUSE",
+      "template": "SLA_BREACH",
+      "about": "PACKING_LIST",
+      "reason": "5 days since receipt, SLA 2"
+    },
+    {
+      "seq": 30,
+      "type": "SlaBreached",
+      "at": "2026-03-15",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS",
+      "days": 5,
+      "slaDays": 1,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 31,
+      "type": "NotificationQueued",
+      "at": "2026-03-15",
+      "role": "LOGISTICS",
+      "template": "SLA_BREACH",
+      "about": "BILL_OF_LADING",
+      "reason": "5 days since receipt, SLA 1"
+    },
+    {
+      "seq": 32,
+      "type": "SlaBreached",
+      "at": "2026-03-15",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER",
+      "days": 5,
+      "slaDays": 3,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 33,
+      "type": "NotificationQueued",
+      "at": "2026-03-15",
+      "role": "CUSTOMS_BROKER",
+      "template": "SLA_BREACH",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "5 days since receipt, SLA 3"
+    },
+    {
+      "seq": 34,
+      "type": "SlaBreached",
+      "at": "2026-03-15",
+      "document": "INSURANCE_CERT",
+      "role": "FINANCE",
+      "days": 5,
+      "slaDays": 3,
+      "version": 1,
+      "rule": "F10"
+    },
+    {
+      "seq": 35,
+      "type": "NotificationQueued",
+      "at": "2026-03-15",
+      "role": "FINANCE",
+      "template": "SLA_BREACH",
+      "about": "INSURANCE_CERT",
+      "reason": "5 days since receipt, SLA 3"
+    },
+    {
+      "seq": 36,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "role": "FINANCE"
+    },
+    {
+      "seq": 37,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "COMMERCIAL_INVOICE",
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_COMMERCIAL_INVOICE",
+      "rule": "F05"
+    },
+    {
+      "seq": 38,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 39,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "PACKING_LIST",
+      "key": "SHP-77-2026|PACKING_LIST|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_PACKING_LIST",
+      "rule": "F05"
+    },
+    {
+      "seq": 40,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 41,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "BILL_OF_LADING",
+      "key": "SHP-77-2026|BILL_OF_LADING|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_BILL_OF_LADING",
+      "rule": "F05"
+    },
+    {
+      "seq": 42,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 43,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "rule": "F05"
+    },
+    {
+      "seq": 44,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "CUSTOMS_ENTRY",
+      "version": 1,
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 45,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "CUSTOMS_ENTRY",
+      "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CUSTOMS_ENTRY",
+      "rule": "F05"
+    },
+    {
+      "seq": 46,
+      "type": "ApprovalGranted",
+      "at": "2026-03-15",
+      "document": "INSURANCE_CERT",
+      "version": 1,
+      "role": "FINANCE"
+    },
+    {
+      "seq": 47,
+      "type": "IntegrationQueued",
+      "at": "2026-03-15",
+      "document": "INSURANCE_CERT",
+      "key": "SHP-77-2026|INSURANCE_CERT|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_INSURANCE_CERT",
+      "rule": "F05"
+    },
+    {
+      "seq": 48,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "COMMERCIAL_INVOICE",
+      "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1"
+    },
+    {
+      "seq": 49,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "PACKING_LIST",
+      "key": "SHP-77-2026|PACKING_LIST|v1"
+    },
+    {
+      "seq": 50,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "BILL_OF_LADING",
+      "key": "SHP-77-2026|BILL_OF_LADING|v1"
+    },
+    {
+      "seq": 51,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1"
+    },
+    {
+      "seq": 52,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "CUSTOMS_ENTRY",
+      "key": "SHP-77-2026|CUSTOMS_ENTRY|v1"
+    },
+    {
+      "seq": 53,
+      "type": "IntegrationAcked",
+      "at": "2026-03-16",
+      "document": "INSURANCE_CERT",
+      "key": "SHP-77-2026|INSURANCE_CERT|v1"
+    },
+    {
+      "seq": 54,
+      "type": "DossierClosed",
+      "at": "2026-03-16",
+      "documents": [
+        "COMMERCIAL_INVOICE",
+        "PACKING_LIST",
+        "BILL_OF_LADING",
+        "CERTIFICATE_OF_ORIGIN",
+        "CUSTOMS_ENTRY",
+        "INSURANCE_CERT"
+      ],
+      "rule": "F11"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "version": "1.0.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 0,
+    "missing": 6
+  },
+  "reconciliation": null,
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [],
+  "notifications": [],
+  "rejected": [
+    {
+      "seq": 1,
+      "at": "2026-03-10",
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "rule": "F03",
+      "reason": "version must be a positive integer (0)"
+    },
+    {
+      "seq": 2,
+      "at": "2026-03-10",
+      "cmd": "RECEIVE",
+      "type": "COMMERCIAL_INVOICE",
+      "rule": "F03",
+      "reason": "version must be a positive integer (1)"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "CommandRejected",
+      "at": "2026-03-10",
+      "cmd": "RECEIVE",
+      "document": "COMMERCIAL_INVOICE",
+      "rule": "F03",
+      "reason": "version must be a positive integer (0)"
+    },
+    {
+      "seq": 2,
+      "type": "CommandRejected",
+      "at": "2026-03-10",
+      "cmd": "RECEIVE",
+      "document": "COMMERCIAL_INVOICE",
+      "rule": "F03",
+      "reason": "version must be a positive integer (1)"
+    }
+  ]
+}
