@@ -74,7 +74,7 @@ public static class Reconciler
         {
             for (var i = 0; i < inv!.Lines!.Count; i++)
             {
-                var ln = inv.Lines[i];
+                var ln = inv.Lines[i] ?? new InvoiceLine(); // a null / non-object line is a line with nothing on it (JS parity)
                 var sku = NormKey(ln.Sku);
                 if (sku.Length == 0) { Add("R21", $"invoice.lines[{i}].sku", "sku", "present", "absent", $"Invoice line {i + 1} has no SKU.", "invoice"); continue; }
                 var qty = ToMinor(ln.Qty, Scale.Qty); var price = ToMinor(ln.UnitPrice, Scale.Money); var total = ToMinor(ln.LineTotal, Scale.Money);
@@ -113,7 +113,7 @@ public static class Reconciler
         {
             for (var i = 0; i < pl!.Lines!.Count; i++)
             {
-                var ln = pl.Lines[i];
+                var ln = pl.Lines[i] ?? new PackingLine();
                 var sku = NormKey(ln.Sku);
                 if (sku.Length == 0) { Add("R21", $"packingList.lines[{i}].sku", "sku", "present", "absent", $"Packing line {i + 1} has no SKU.", "packingList"); continue; }
                 var qty = ToMinor(ln.Qty, Scale.Qty); var net = ToMinor(ln.NetKg, Scale.Kg); var gross = ToMinor(ln.GrossKg, Scale.Kg); var pk = ToMinor(ln.Packages, Scale.Unit);

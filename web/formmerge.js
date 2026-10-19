@@ -9,6 +9,9 @@ export const INV_HEAD = ["number", "date", "currency", "incoterm", "buyer", "tot
 export const PL_HEAD = ["number", "date", "invoiceRef", "shipmentRef", "totalPackages", "totalNetKg", "totalGrossKg"];
 export const BL_HEAD = ["number", "date", "shipmentRef", "consignee", "packages", "grossKg"];
 
+/** A line entry as the form can show it: null / non-object entries (which the engine reports as R21) render as an empty line. */
+export const asLine = (ln) => (ln !== null && typeof ln === "object" && !Array.isArray(ln) ? ln : {});
+
 /** Apply one edit (header field or line field) onto the bundle, in place. Creates the document/line if absent. */
 export function applyEdit(bundle, doc, line, key, value) {
   bundle[doc] ??= doc === "billOfLading" ? {} : { lines: [] };
@@ -33,7 +36,7 @@ export function roundTrip(bundle) {
   for (const [doc, head, cols] of docs) {
     if (!bundle[doc]) continue;
     for (const k of head) if (k in bundle[doc]) applyEdit(b, doc, null, k, bundle[doc][k]);
-    if (cols && Array.isArray(bundle[doc].lines)) bundle[doc].lines.forEach((ln, i) => { for (const k of cols) if (k in ln) applyEdit(b, doc, i, k, ln[k]); });
+    if (cols && Array.isArray(bundle[doc].lines)) bundle[doc].lines.forEach((ln, i) => { const l = asLine(ln); for (const k of cols) if (k in l) applyEdit(b, doc, i, k, l[k]); });
   }
   return b;
 }

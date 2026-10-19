@@ -116,6 +116,7 @@ add("C47_leap_day_valid", "2028-02-29 is valid; span 10 days → PASS", (b) => {
 // ── structure ──
 add("C48_no_invoice_lines", "Invoice with empty lines array", (b) => { inv(b).lines = []; }, ["R21|invoice.lines"]);
 add("C52_lines_not_a_list", "Invoice lines sent as an object instead of a list → R21, no exception", (b) => { inv(b).lines = { sku: "PMP-200" }; }, ["R21|invoice.lines"], { adversarial: true });
+add("C53_null_line", "Invoice line sent as null → R21 for that line, no exception; its SKU is then extra on the packing list and the invoice total no longer sums", (b) => { inv(b).lines[2] = null; }, ["R21|invoice.lines[2].sku", "R04|GSK-012", "R07|invoice"], { adversarial: true });
 add("C49_missing_bl", "Bundle without bill of lading", (b) => { delete b.billOfLading; }, ["R21|billOfLading"]);
 add("C50_everything_wrong", "Multiple simultaneous defects — all reported, none masked", (b) => { pl(b).invoiceRef = "INV-X"; pl(b).lines[1].qty = "140"; inv(b).lines[2].lineTotal = "1210.00"; bl(b).consignee = "Other Co"; bl(b).date = "2026-03-01"; }, ["R01|invoiceRef", "R05|VLV-050", "R06|GSK-012", "R07|invoice", "R17|consignee", "R12|packing>bl"]);
 

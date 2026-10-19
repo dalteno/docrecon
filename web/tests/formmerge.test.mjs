@@ -5,7 +5,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { reconcile } from "../docrecon.js";
-import { roundTrip, effectiveBundle, applyEdit } from "../formmerge.js";
+import { roundTrip, effectiveBundle, applyEdit, asLine } from "../formmerge.js";
 
 const casesDir = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "cases");
 for (const f of readdirSync(casesDir).filter((x) => x.endsWith(".json")).sort()) {
@@ -24,4 +24,10 @@ test("editing a visible field keeps the hidden line currency (C23)", () => {
   assert.equal(b.invoice.lines[1].currency, "USD");
   const rules = reconcile(effectiveBundle(b)).findings.map((x) => x.rule);
   assert.ok(rules.includes("R08") && rules.includes("R05"));
+});
+
+test("asLine: null / non-object line entries render as an empty line and round-trip is still a no-op", () => {
+  assert.deepEqual(asLine(null), {}); assert.deepEqual(asLine(5), {}); assert.deepEqual(asLine([]), {}); assert.deepEqual(asLine({ sku: "A" }), { sku: "A" });
+  const b = { invoice: { lines: [null, { sku: "A", qty: "1" }] }, packingList: { lines: ["x"] } };
+  assert.deepEqual(roundTrip(b), b);
 });

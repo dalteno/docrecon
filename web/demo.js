@@ -3,7 +3,7 @@
  * Edits are applied onto a copy of the loaded case (web/formmerge.js), so fields the form does not display are kept.
  */
 import { reconcile, RULES, VERSION } from "/lab/docrecon/docrecon.js";
-import { applyEdit, effectiveBundle, INV_COLS, PL_COLS, INV_HEAD, PL_HEAD, BL_HEAD } from "/lab/docrecon/formmerge.js";
+import { applyEdit, effectiveBundle, asLine, INV_COLS, PL_COLS, INV_HEAD, PL_HEAD, BL_HEAD } from "/lab/docrecon/formmerge.js";
 
 const REPO = "https://github.com/dalteno/docrecon";
 const $ = (s, r = document) => r.querySelector(s);
@@ -18,7 +18,7 @@ function field(doc, key, value) {
 }
 function table(doc, cols, lines) {
   const head = cols.map((c) => `<th>${esc(c)}</th>`).join("");
-  const rows = (lines ?? []).map((ln, i) => `<tr>${cols.map((c) => `<td><input data-doc="${doc}" data-line="${i}" data-key="${esc(c)}" value="${esc(ln[c] ?? "")}" spellcheck="false" dir="ltr"></td>`).join("")}<td><button type="button" class="x" data-del="${doc}:${i}" aria-label="${esc(tt("w_remove", "Remove line"))}">×</button></td></tr>`).join("");
+  const rows = (lines ?? []).map((raw, i) => { const ln = asLine(raw); return `<tr>${cols.map((c) => `<td><input data-doc="${doc}" data-line="${i}" data-key="${esc(c)}" value="${esc(ln[c] ?? "")}" spellcheck="false" dir="ltr"></td>`).join("")}<td><button type="button" class="x" data-del="${doc}:${i}" aria-label="${esc(tt("w_remove", "Remove line"))}">×</button></td></tr>`; }).join("");
   return `<table dir="ltr"><thead><tr>${head}<th></th></tr></thead><tbody>${rows}</tbody></table><button type="button" class="addline" data-add="${doc}">${esc(tt("w_addline", "+ line"))}</button>`;
 }
 
@@ -39,7 +39,7 @@ function run() {
   const badge = $("#status");
   badge.textContent = report.status;
   badge.className = "status " + report.status.toLowerCase();
-  $("#meta").textContent = `${report.findings.length} ${tt("w_findings", "finding(s)")} · ${report.rulesEvaluated} ${tt("w_rules", "rules")} · ${ms.toFixed(2)} ms · ${tt("w_engine", "engine")} ${VERSION}`;
+  $("#meta").textContent = `${report.findings.length} ${report.findings.length === 1 ? tt("w_finding_one", "finding") : tt("w_finding_many", "findings")} · ${report.rulesEvaluated} ${tt("w_rules", "rules")} · ${ms.toFixed(2)} ms · ${tt("w_engine", "engine")} ${VERSION}`;
   const rows = report.findings.map((f) => `<tr class="${f.severity.toLowerCase()}">
     <td><a href="#rules" title="${esc(RULES.find((r) => r.id === f.rule)?.contract)}">${f.rule}</a><br><small>${esc(f.code)}</small></td>
     <td><span class="sev">${f.severity}</span></td>
@@ -59,7 +59,7 @@ function loadCase(id) {
   bundle = structuredClone(current.bundle);
   options = current.options ?? {};
   $("#casetitle").textContent = current.title + (current.adversarial ? ` — ${tt("w_adversarial", "adversarial")}` : "");
-  $("#options").textContent = Object.keys(options).length ? "options: " + JSON.stringify(options) : tt("w_defaults", "default options (qty ±0, weight ±2 %, amounts ±0.01, span ≤ 60 days)");
+  $("#options").textContent = Object.keys(options).length ? tt("w_options", "options:") + " " + JSON.stringify(options) : tt("w_defaults", "default options (qty ±0, weight ±2 %, amounts ±0.01, span ≤ 60 days)");
   render();
 }
 

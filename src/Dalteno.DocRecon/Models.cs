@@ -109,7 +109,15 @@ public sealed class TolerantListConverter<T> : JsonConverter<List<T>?>
     {
         if (reader.TokenType == JsonTokenType.Null) return null;
         if (reader.TokenType != JsonTokenType.StartArray) { reader.Skip(); return null; }
-        return JsonSerializer.Deserialize<List<T>>(ref reader, options);
+        // Element-tolerant: a null or non-object element becomes a null entry (the engine treats it as an empty line),
+        // mirroring the JS engine instead of throwing JsonException.
+        var list = new List<T>();
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+        {
+            if (reader.TokenType == JsonTokenType.StartObject) list.Add(JsonSerializer.Deserialize<T>(ref reader, options)!);
+            else { reader.Skip(); list.Add(default!); }
+        }
+        return list;
     }
 
     /// <inheritdoc />

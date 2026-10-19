@@ -1,7 +1,7 @@
 /**
  * docrecon — deterministic reconciliation of Commercial Invoice ↔ Packing List ↔ Bill of Lading.
  *
- * JavaScript port of the Dalteno.DocRecon (.NET 8) rule engine. Both implementations must produce
+ * JavaScript port of the Dalteno.DocRecon (.NET 10) rule engine. Both implementations must produce
  * identical findings for every case under /cases (parity is a CI gate, see tests/parity.test.mjs).
  *
  * Design rules (ADR-0001..0003):
@@ -166,7 +166,8 @@ export function reconcile(bundle, options = {}) {
     if (minor !== null && minor <= 0n) add("R16", `${name}:${sku}:${field}`, field, "> 0", fromMinor(minor, field === "qty" ? SCALE.QTY : field === "unitPrice" || field === "lineTotal" ? SCALE.MONEY : SCALE.KG), `${name} line ${idx + 1} (${sku}) has a non-positive ${field}.`, [name]);
   };
   if (invLines) {
-    inv.lines.forEach((ln, i) => {
+    inv.lines.forEach((raw, i) => {
+      const ln = raw !== null && typeof raw === "object" && !Array.isArray(raw) ? raw : {}; // a non-object line is a line with nothing on it
       const sku = normKey(ln.sku);
       if (!sku) { add("R21", `invoice.lines[${i}].sku`, "sku", "present", "absent", `Invoice line ${i + 1} has no SKU.`, ["invoice"]); return; }
       const qty = toMinor(ln.qty, SCALE.QTY), price = toMinor(ln.unitPrice, SCALE.MONEY), total = toMinor(ln.lineTotal, SCALE.MONEY);
@@ -191,7 +192,8 @@ export function reconcile(bundle, options = {}) {
     });
   }
   if (plLines) {
-    pl.lines.forEach((ln, i) => {
+    pl.lines.forEach((raw, i) => {
+      const ln = raw !== null && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
       const sku = normKey(ln.sku);
       if (!sku) { add("R21", `packingList.lines[${i}].sku`, "sku", "present", "absent", `Packing line ${i + 1} has no SKU.`, ["packingList"]); return; }
       const qty = toMinor(ln.qty, SCALE.QTY), net = toMinor(ln.netKg, SCALE.KG), gross = toMinor(ln.grossKg, SCALE.KG), pk = toMinor(ln.packages, 1);

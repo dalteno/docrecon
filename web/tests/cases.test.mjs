@@ -97,3 +97,15 @@ test("golden reports (if present) match the current engine output exactly", () =
   }
   assert.ok(n === 0 || n === files.length, `golden coverage ${n}/${files.length}`);
 });
+
+test("non-object line entries never throw: null, number, string, array → R21 for that line", () => {
+  const base = JSON.parse(readFileSync(join(casesDir, "C00_clean.json"), "utf8")).bundle;
+  for (const bad of [null, 5, "x", [], true]) {
+    const b = structuredClone(base);
+    b.invoice.lines[0] = bad;
+    b.packingList.lines[1] = bad;
+    const r = reconcile(b, {});
+    assert.ok(r.findings.some((f) => f.rule === "R21" && f.key === "invoice.lines[0].sku"), `invoice ${String(bad)}`);
+    assert.ok(r.findings.some((f) => f.rule === "R21" && f.key === "packingList.lines[1].sku"), `packing ${String(bad)}`);
+  }
+});

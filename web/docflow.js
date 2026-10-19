@@ -7,7 +7,7 @@
  * hand-off → the dossier closes only when every required document is APPROVED and INTEGRATED.
  *
  * Pure function: run(dossier, commands) → report. No clock (every command carries `at`), no I/O, no randomness.
- * JavaScript twin of Dalteno.DocFlow (.NET 8); shared cases under /cases are the parity gate.
+ * JavaScript twin of Dalteno.DocFlow (.NET 10); shared cases under /cases are the parity gate.
  */
 import { reconcile as docrecon, toMinor, dayNumber, normKey, SCALE } from "./docrecon.js";
 

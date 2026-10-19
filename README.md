@@ -19,7 +19,7 @@ Two implementations, one rule catalogue, one set of shared cases:
 | | .NET 10 (`src/Dalteno.DocRecon`) | JavaScript (`web/docrecon.js`) |
 |---|---|---|
 | purpose | production library (ERP / customs-broker back office) | same rules in the browser — the live demo on [dalteno.com](https://dalteno.com) |
-| tests | xUnit: 55 shared cases + helper tests | `node --test`: 55 shared cases + helper tests |
+| tests | xUnit: 56 shared cases + helper tests | `node --test`: 56 shared cases + helper tests |
 | parity | every case must reproduce the JS **golden report** field by field | every case must match the hand-written expectation |
 
 CI runs both. A change that makes the two engines disagree fails the build.
@@ -63,7 +63,7 @@ Report status: any BLOCKER → `BLOCKED`; else any WARNING → `REVIEW`; else `P
 3. **Pure function.** No I/O, no clock, no randomness, input never mutated. Same bundle + same options ⇒ identical report.
 4. **Fail loud, never guess.** A non-numeric quantity is a finding (`R21`), not an exception and not a silent zero.
    Absent data is skipped by the rules that need it and reported once.
-5. **The cases are the spec.** `cases/generate.mjs` holds 55 hand-written expectations (18 adversarial: float traps, European number formats,
+5. **The cases are the spec.** `cases/generate.mjs` holds 56 hand-written expectations (19 adversarial: float traps, European number formats,
    half-cent rounding, negative lines that balance the total, duplicate SKUs, legal-suffix variants, leap days, boundary
    tolerances). Expectations are never derived from the engine.
 
