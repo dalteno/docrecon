@@ -93,6 +93,26 @@ public sealed class SharedCasesTests
         Assert.Equal(3, r.Findings.Count);
         Assert.All(r.Findings, f => Assert.Equal("R21", f.Rule));
     }
+
+    [Theory]
+    [InlineData("null")]
+    [InlineData("5")]
+    [InlineData("\"x\"")]
+    [InlineData("[]")]
+    [InlineData("true")]
+    public void NonObjectLineEntriesNeverThrow(string badElement)
+    {
+        // JS parity: a null / non-object line is a line with nothing on it → R21 for that line's SKU, no exception.
+        var json = File.ReadAllText(Path.Combine(CasesDir, "C00_clean.json"));
+        var root = JsonNode.Parse(json)!.AsObject();
+        var bundle = root["bundle"]!.AsObject();
+        bundle["invoice"]!["lines"]!.AsArray()[0] = JsonNode.Parse(badElement);
+        bundle["packingList"]!["lines"]!.AsArray()[1] = JsonNode.Parse(badElement);
+        var b = JsonSerializer.Deserialize<Bundle>(bundle.ToJsonString(), Json.Options)!;
+        var report = Reconciler.Reconcile(b, ReconcileOptions.Default);
+        Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "invoice.lines[0].sku");
+        Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "packingList.lines[1].sku");
+    }
 }
 
 /// <summary>Helper-level tests mirroring web/tests/cases.test.mjs.</summary>
@@ -172,25 +192,5 @@ public sealed class NumericTests
     {
         Assert.Equal(21, RuleCatalogue.All.Count);
         Assert.Equal(21, RuleCatalogue.All.Select(r => r.Id).Distinct().Count());
-    }
-
-    [Theory]
-    [InlineData("null")]
-    [InlineData("5")]
-    [InlineData("\"x\"")]
-    [InlineData("[]")]
-    [InlineData("true")]
-    public void NonObjectLineEntriesNeverThrow(string badElement)
-    {
-        // JS parity: a null / non-object line is a line with nothing on it → R21 for that line's SKU, no exception.
-        var json = File.ReadAllText(Path.Combine(CasesDir, "C00_clean.json"));
-        var root = JsonNode.Parse(json)!.AsObject();
-        var bundle = root["bundle"]!.AsObject();
-        bundle["invoice"]!["lines"]!.AsArray()[0] = JsonNode.Parse(badElement);
-        bundle["packingList"]!["lines"]!.AsArray()[1] = JsonNode.Parse(badElement);
-        var b = JsonSerializer.Deserialize<Bundle>(bundle.ToJsonString(), Json.Options)!;
-        var report = Reconciler.Reconcile(b, ReconcileOptions.Default);
-        Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "invoice.lines[0].sku");
-        Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "packingList.lines[1].sku");
     }
 }

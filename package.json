@@ -1,7 +1,7 @@
 {
   "name": "@dalteno/docrecon",
   "version": "1.0.0",
-  "description": "docrecon (document reconciliation) and docflow (dossier workflow) — deterministic engines in .NET 8 and JS, parity-tested on shared cases.",
+  "description": "docrecon (document reconciliation) and docflow (dossier workflow) — deterministic engines in .NET 10 and JS, parity-tested on shared cases.",
   "type": "module",
   "main": "web/docrecon.js",
   "scripts": {
