@@ -1,0 +1,500 @@
+{
+  "version": "1.1.0",
+  "dossier": "SHP-77-2026",
+  "definition": "SEA_IMPORT_V1",
+  "status": "OPEN",
+  "closedAt": null,
+  "progress": {
+    "required": 6,
+    "integrated": 0,
+    "awaiting": 4,
+    "missing": 1
+  },
+  "reconciliation": {
+    "at": "2026-03-11",
+    "status": "BLOCKED",
+    "blockers": 1,
+    "warnings": 1,
+    "findings": [
+      "R05|VLV-050",
+      "R22|billOfLading.grossKg"
+    ],
+    "inputVersions": "COMMERCIAL_INVOICE@1,PACKING_LIST@2,BILL_OF_LADING@1",
+    "acceptedBy": null
+  },
+  "documents": {
+    "COMMERCIAL_INVOICE": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "PACKING_LIST": {
+      "role": "WAREHOUSE",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 2,
+      "receivedAt": "2026-03-11",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "BILL_OF_LADING": {
+      "role": "LOGISTICS",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "CERTIFICATE_OF_ORIGIN": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "APPROVED",
+      "version": 1,
+      "receivedAt": "2026-03-10",
+      "missing": null,
+      "integrationKey": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "slaBreached": false
+    },
+    "CUSTOMS_ENTRY": {
+      "role": "CUSTOMS_BROKER",
+      "required": true,
+      "status": "AWAITING_APPROVAL",
+      "version": 1,
+      "receivedAt": "2026-03-11",
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSURANCE_CERT": {
+      "role": "FINANCE",
+      "required": true,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    },
+    "INSPECTION_CERT": {
+      "role": "QUALITY",
+      "required": false,
+      "status": "MISSING",
+      "version": null,
+      "receivedAt": null,
+      "missing": null,
+      "integrationKey": null,
+      "slaBreached": false
+    }
+  },
+  "integration": [
+    {
+      "seq": 19,
+      "at": "2026-03-11",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "fields": {
+        "number": "COO-2026-0088",
+        "originCountry": "EG",
+        "invoiceRef": "INV-2026-0417"
+      },
+      "status": "QUEUED",
+      "ackedAt": null
+    }
+  ],
+  "notifications": [
+    {
+      "seq": 4,
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 8,
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 12,
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 17,
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 23,
+      "at": "2026-03-11",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 29,
+      "at": "2026-03-11",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v2 awaiting your approval"
+    },
+    {
+      "seq": 32,
+      "at": "2026-03-11",
+      "role": "CUSTOMS_BROKER",
+      "template": "RECONCILIATION_BLOCKED",
+      "about": "RECONCILIATION",
+      "reason": "1 blocking finding(s): R05|VLV-050 R22|billOfLading.grossKg"
+    }
+  ],
+  "rejected": [
+    {
+      "seq": 24,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "CUSTOMS_ENTRY",
+      "rule": "F18",
+      "reason": "reconciliation REVIEW (1 warning(s): R22|billOfLading.grossKg) — approval needs acceptWarnings: true and a reason"
+    },
+    {
+      "seq": 33,
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "type": "CUSTOMS_ENTRY",
+      "rule": "F07",
+      "reason": "reconciliation BLOCKED: R05|VLV-050 R22|billOfLading.grossKg"
+    }
+  ],
+  "ignored": [],
+  "events": [
+    {
+      "seq": 1,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "version": 1,
+      "sha": "sha-COMMERCIAL_INVOICE-v1"
+    },
+    {
+      "seq": 2,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "fields": [
+        "number",
+        "date",
+        "currency",
+        "total",
+        "buyer"
+      ]
+    },
+    {
+      "seq": 3,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "COMMERCIAL_INVOICE",
+      "role": "FINANCE"
+    },
+    {
+      "seq": 4,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "FINANCE",
+      "template": "ACTION_REQUIRED",
+      "about": "COMMERCIAL_INVOICE",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 5,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "version": 1,
+      "sha": "sha-PACKING_LIST-v1"
+    },
+    {
+      "seq": 6,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 7,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 8,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 9,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "version": 1,
+      "sha": "sha-bl-nogross"
+    },
+    {
+      "seq": 10,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "fields": [
+        "number",
+        "shipmentRef",
+        "containers",
+        "seals"
+      ]
+    },
+    {
+      "seq": 11,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "BILL_OF_LADING",
+      "role": "LOGISTICS"
+    },
+    {
+      "seq": 12,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "LOGISTICS",
+      "template": "ACTION_REQUIRED",
+      "about": "BILL_OF_LADING",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 13,
+      "type": "ReconciliationRun",
+      "at": "2026-03-10",
+      "status": "REVIEW",
+      "blockers": 0,
+      "warnings": 1,
+      "findings": [
+        "R22|billOfLading.grossKg"
+      ],
+      "rule": "F07"
+    },
+    {
+      "seq": 14,
+      "type": "DocumentReceived",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "sha": "sha-CERTIFICATE_OF_ORIGIN-v1"
+    },
+    {
+      "seq": 15,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "fields": [
+        "number",
+        "originCountry",
+        "invoiceRef"
+      ]
+    },
+    {
+      "seq": 16,
+      "type": "Routed",
+      "at": "2026-03-10",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 17,
+      "type": "NotificationQueued",
+      "at": "2026-03-10",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CERTIFICATE_OF_ORIGIN",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 18,
+      "type": "ApprovalGranted",
+      "at": "2026-03-11",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "version": 1,
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 19,
+      "type": "IntegrationQueued",
+      "at": "2026-03-11",
+      "document": "CERTIFICATE_OF_ORIGIN",
+      "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+      "adapter": "ORACLE_STAGING",
+      "target": "DOCFLOW_STG.STG_CERTIFICATE_OF_ORIGIN",
+      "rule": "F05"
+    },
+    {
+      "seq": 20,
+      "type": "DocumentReceived",
+      "at": "2026-03-11",
+      "document": "CUSTOMS_ENTRY",
+      "version": 1,
+      "sha": "sha-CUSTOMS_ENTRY-v1"
+    },
+    {
+      "seq": 21,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-11",
+      "document": "CUSTOMS_ENTRY",
+      "fields": [
+        "entryNo",
+        "declaredValue",
+        "hsCodes"
+      ]
+    },
+    {
+      "seq": 22,
+      "type": "Routed",
+      "at": "2026-03-11",
+      "document": "CUSTOMS_ENTRY",
+      "role": "CUSTOMS_BROKER"
+    },
+    {
+      "seq": 23,
+      "type": "NotificationQueued",
+      "at": "2026-03-11",
+      "role": "CUSTOMS_BROKER",
+      "template": "ACTION_REQUIRED",
+      "about": "CUSTOMS_ENTRY",
+      "reason": "v1 awaiting your approval"
+    },
+    {
+      "seq": 24,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "CUSTOMS_ENTRY",
+      "rule": "F18",
+      "reason": "reconciliation REVIEW (1 warning(s): R22|billOfLading.grossKg) — approval needs acceptWarnings: true and a reason"
+    },
+    {
+      "seq": 25,
+      "type": "DocumentSuperseded",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "oldVersion": 1,
+      "newVersion": 2,
+      "previousStatus": "AWAITING_APPROVAL",
+      "rule": "F03"
+    },
+    {
+      "seq": 26,
+      "type": "DocumentReceived",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "version": 2,
+      "sha": "sha-pl-short"
+    },
+    {
+      "seq": 27,
+      "type": "ExtractionSucceeded",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "fields": [
+        "number",
+        "invoiceRef",
+        "totalPackages",
+        "totalGrossKg"
+      ]
+    },
+    {
+      "seq": 28,
+      "type": "Routed",
+      "at": "2026-03-11",
+      "document": "PACKING_LIST",
+      "role": "WAREHOUSE"
+    },
+    {
+      "seq": 29,
+      "type": "NotificationQueued",
+      "at": "2026-03-11",
+      "role": "WAREHOUSE",
+      "template": "ACTION_REQUIRED",
+      "about": "PACKING_LIST",
+      "reason": "v2 awaiting your approval"
+    },
+    {
+      "seq": 30,
+      "type": "ReconciliationRun",
+      "at": "2026-03-11",
+      "status": "BLOCKED",
+      "blockers": 1,
+      "warnings": 1,
+      "findings": [
+        "R05|VLV-050",
+        "R22|billOfLading.grossKg"
+      ],
+      "rule": "F07"
+    },
+    {
+      "seq": 31,
+      "type": "RoutedToCompliance",
+      "at": "2026-03-11",
+      "role": "CUSTOMS_BROKER",
+      "findings": [
+        "R05|VLV-050",
+        "R22|billOfLading.grossKg"
+      ],
+      "rule": "F07"
+    },
+    {
+      "seq": 32,
+      "type": "NotificationQueued",
+      "at": "2026-03-11",
+      "role": "CUSTOMS_BROKER",
+      "template": "RECONCILIATION_BLOCKED",
+      "about": "RECONCILIATION",
+      "reason": "1 blocking finding(s): R05|VLV-050 R22|billOfLading.grossKg"
+    },
+    {
+      "seq": 33,
+      "type": "CommandRejected",
+      "at": "2026-03-11",
+      "cmd": "APPROVE",
+      "document": "CUSTOMS_ENTRY",
+      "rule": "F07",
+      "reason": "reconciliation BLOCKED: R05|VLV-050 R22|billOfLading.grossKg"
+    }
+  ]
+}

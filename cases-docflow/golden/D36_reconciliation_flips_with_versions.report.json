@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dossier": "SHP-77-2026",
   "definition": "SEA_IMPORT_V1",
   "status": "OPEN",
@@ -16,7 +16,8 @@
     "blockers": 0,
     "warnings": 0,
     "findings": [],
-    "inputVersions": "COMMERCIAL_INVOICE@3,PACKING_LIST@1,BILL_OF_LADING@1"
+    "inputVersions": "COMMERCIAL_INVOICE@3,PACKING_LIST@1,BILL_OF_LADING@1",
+    "acceptedBy": null
   },
   "documents": {
     "COMMERCIAL_INVOICE": {

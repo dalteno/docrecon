@@ -10,7 +10,10 @@ public sealed record DocumentState(string Role, bool Required, string Status, in
 public sealed record Progress(int Required, int Integrated, int Awaiting, int Missing);
 
 /// <summary>Outcome of the last docrecon run over invoice + packing list + BL.</summary>
-public sealed record ReconciliationState(string At, string Status, int Blockers, int Warnings, IReadOnlyList<string> Findings, string InputVersions);
+/// <summary>An explicit, reasoned acceptance of reconciliation warnings (F18). Cleared whenever reconciliation re-runs.</summary>
+public sealed record WarningsAcceptance(string Role, string At, string Reason, IReadOnlyList<string> Findings);
+
+public sealed record ReconciliationState(string At, string Status, int Blockers, int Warnings, IReadOnlyList<string> Findings, string InputVersions, WarningsAcceptance? AcceptedBy);
 
 /// <summary>One outbox record for the existing ERP. Status: QUEUED → ACKED, or SUPERSEDED / CANCELLED.</summary>
 public sealed class IntegrationRecord

@@ -12,7 +12,7 @@ namespace Dalteno.DocFlow;
 /// </summary>
 public static class Engine
 {
-    public const string Version = "1.0.0";
+    public const string Version = "1.1.0";
 
     private sealed class Doc
     {
@@ -95,7 +95,7 @@ public static class Engine
             };
             var report = Reconciler.Reconcile(bundle);
             var findings = report.Findings.Select(f => $"{f.Rule}|{f.Key}").ToList();
-            recon = new ReconciliationState(at, report.Status, report.Summary.BLOCKER, report.Summary.WARNING, findings, versions);
+            recon = new ReconciliationState(at, report.Status, report.Summary.BLOCKER, report.Summary.WARNING, findings, versions, null); // a re-run always clears any earlier acceptance
             Emit("ReconciliationRun", at, ("status", report.Status), ("blockers", report.Summary.BLOCKER), ("warnings", report.Summary.WARNING), ("findings", Arr(findings)), ("rule", "F07"));
             if (report.Status == "BLOCKED")
             {
@@ -199,6 +199,14 @@ public static class Engine
                     {
                         if (recon is null) { Reject(at, cmd, type, "F07", $"reconciliation has not run yet (needs {string.Join(", ", def.Reconciliation.Group)})"); break; }
                         if (recon.Status == "BLOCKED") { Reject(at, cmd, type, "F07", $"reconciliation BLOCKED: {string.Join(" ", recon.Findings)}"); break; }
+                        if (recon.Status == "REVIEW" && def.Reconciliation.ReviewNeedsSignoff && recon.AcceptedBy is null)
+                        {
+                            var acceptReason = (Str(c["reason"]) ?? "").Trim();
+                            var accept = c["acceptWarnings"] is JsonValue av && av.TryGetValue<bool>(out var ab) && ab;
+                            if (!accept || acceptReason.Length == 0) { Reject(at, cmd, type, "F18", $"reconciliation REVIEW ({recon.Warnings} warning(s): {string.Join(" ", recon.Findings)}) — approval needs acceptWarnings: true and a reason"); break; }
+                            recon = recon with { AcceptedBy = new WarningsAcceptance(role!, at, acceptReason, recon.Findings.ToList()) };
+                            Emit("ReconciliationWarningsAccepted", at, ("role", role), ("reason", acceptReason), ("findings", Arr(recon.Findings)), ("rule", "F18"));
+                        }
                     }
                     if (spec.Check == "INSURANCE_COVERS_INVOICE")
                     {

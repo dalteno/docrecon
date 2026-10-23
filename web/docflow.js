@@ -11,7 +11,7 @@
  */
 import { reconcile as docrecon, toMinor, dayNumber, normKey, SCALE } from "./docrecon.js";
 
-export const VERSION = "1.0.0";
+export const VERSION = "1.1.0";
 
 /** Default dossier definition — sea import, Egyptian customs practice. Roles are the real roles of the process. */
 export const DEFAULT_DEFINITION = Object.freeze({
@@ -26,7 +26,7 @@ export const DEFAULT_DEFINITION = Object.freeze({
     { type: "INSURANCE_CERT", role: "FINANCE", required: true, fields: ["policyNo", "coveredValue", "currency"], slaDays: 3, check: "INSURANCE_COVERS_INVOICE" },
     { type: "INSPECTION_CERT", role: "QUALITY", required: false, requiredIf: "requiresInspection", fields: ["certNo", "result"], slaDays: 3 },
   ],
-  reconciliation: { group: ["COMMERCIAL_INVOICE", "PACKING_LIST", "BILL_OF_LADING"], complianceRole: "CUSTOMS_BROKER" },
+  reconciliation: { group: ["COMMERCIAL_INVOICE", "PACKING_LIST", "BILL_OF_LADING"], complianceRole: "CUSTOMS_BROKER", reviewNeedsSignoff: true },
   integration: { adapter: "ORACLE_STAGING", schema: "DOCFLOW_STG" },
 });
 
@@ -49,6 +49,7 @@ export const RULES = Object.freeze([
   r("F15", "UNKNOWN_DOCUMENT_TYPE", "A document type outside the dossier definition is rejected."),
   r("F16", "INVALID_COMMAND", "A command without a valid ISO date or with an unknown verb is rejected."),
   r("F17", "MONOTONIC_TIME", "A command dated before the latest processed command is rejected: the dossier clock never runs backwards."),
+  r("F18", "REVIEW_NEEDS_SIGNOFF", "When reconciliation ends in REVIEW, the gated document is approved only with acceptWarnings and a written reason; the acceptance is recorded with the role. A re-run of reconciliation clears it. BLOCKED can never be accepted."),
 ]);
 function r(id, code, contract) { return Object.freeze({ id, code, contract }); }
 
@@ -103,7 +104,7 @@ export function run(dossier, commands) {
     reconInputVersions = versions;
     const bundle = { invoice: docs.COMMERCIAL_INVOICE.payload, packingList: docs.PACKING_LIST.payload, billOfLading: docs.BILL_OF_LADING.payload };
     const report = docrecon(bundle);
-    recon = { at, status: report.status, blockers: report.summary.BLOCKER, warnings: report.summary.WARNING, findings: report.findings.map((f) => `${f.rule}|${f.key}`), inputVersions: versions };
+    recon = { at, status: report.status, blockers: report.summary.BLOCKER, warnings: report.summary.WARNING, findings: report.findings.map((f) => `${f.rule}|${f.key}`), inputVersions: versions, acceptedBy: null }; // a re-run always clears any earlier acceptance
     emit("ReconciliationRun", at, { status: report.status, blockers: report.summary.BLOCKER, warnings: report.summary.WARNING, findings: recon.findings, rule: "F07" });
     if (report.status === "BLOCKED") {
       emit("RoutedToCompliance", at, { role: def.reconciliation.complianceRole, findings: recon.findings, rule: "F07" });
@@ -190,6 +191,12 @@ export function run(dossier, commands) {
         if (spec.gate === "RECONCILIATION") {
           if (!recon) { reject(c, "F07", `reconciliation has not run yet (needs ${def.reconciliation.group.join(", ")})`); break; }
           if (recon.status === "BLOCKED") { reject(c, "F07", `reconciliation BLOCKED: ${recon.findings.join(" ")}`); break; }
+          if (recon.status === "REVIEW" && def.reconciliation.reviewNeedsSignoff !== false && !recon.acceptedBy) {
+            const reason = c.reason === undefined || c.reason === null ? "" : String(c.reason).trim();
+            if (c.acceptWarnings !== true || !reason) { reject(c, "F18", `reconciliation REVIEW (${recon.warnings} warning(s): ${recon.findings.join(" ")}) — approval needs acceptWarnings: true and a reason`); break; }
+            recon.acceptedBy = { role: c.role, at: c.at, reason, findings: [...recon.findings] };
+            emit("ReconciliationWarningsAccepted", c.at, { role: c.role, reason, findings: recon.findings, rule: "F18" });
+          }
         }
         if (spec.check === "INSURANCE_COVERS_INVOICE") {
           const inv = docs.COMMERCIAL_INVOICE;

@@ -48,8 +48,8 @@ test("determinism and no input mutation", () => {
   assert.equal(a, b); assert.equal(JSON.stringify(c.commands), before);
 });
 
-test("rule catalogue: 17 rules, unique ids; definition has 7 documents and 6 required by default", () => {
-  assert.equal(RULES.length, 17); assert.equal(new Set(RULES.map((r) => r.id)).size, 17);
+test("rule catalogue: 18 rules, unique ids; definition has 7 documents and 6 required by default", () => {
+  assert.equal(RULES.length, 18); assert.equal(new Set(RULES.map((r) => r.id)).size, 18);
   assert.equal(DEFAULT_DEFINITION.documents.length, 7);
   assert.equal(DEFAULT_DEFINITION.documents.filter((d) => d.required).length, 6);
 });
@@ -62,4 +62,24 @@ test("golden reports (if present) match exactly", () => {
     assert.equal(JSON.stringify(run(c.dossier, c.commands), null, 2) + "\n", golden, c.id); n++;
   }
   assert.ok(n === 0 || n === files.length, `golden coverage ${n}/${files.length}`);
+});
+
+// The flow must STOP on REVIEW, not merely "not be PASS" (external review, 23 Oct): assert the gate itself, the recorded acceptance,
+// and that a re-run of reconciliation (new document version) clears the acceptance so it cannot be inherited.
+test("F18: REVIEW stops the gated approval; an explicit, reasoned acceptance is recorded; a reconciliation re-run clears it", () => {
+  const base = JSON.parse(readFileSync(join(casesDir, "D44_review_accepted_with_reason.json"), "utf8"));
+  const r1 = run(base.dossier, base.commands);
+  assert.equal(r1.reconciliation.status, "REVIEW");
+  assert.equal(r1.documents.CUSTOMS_ENTRY.status, "APPROVED");
+  assert.ok(r1.reconciliation.acceptedBy && r1.reconciliation.acceptedBy.role === "CUSTOMS_BROKER" && r1.reconciliation.acceptedBy.reason.length > 0);
+  assert.equal(r1.events.filter((e) => e.type === "ReconciliationWarningsAccepted").length, 1);
+  // same commands without the acceptance flag → the approval is rejected with F18 and the document stays AWAITING_APPROVAL
+  const cmds = base.commands.map((c) => (c.cmd === "APPROVE" && c.type === "CUSTOMS_ENTRY" ? { ...c, acceptWarnings: undefined, reason: undefined } : c));
+  const r2 = run(base.dossier, cmds);
+  assert.equal(r2.documents.CUSTOMS_ENTRY.status, "AWAITING_APPROVAL");
+  assert.ok(r2.rejected.some((x) => x.rule === "F18"));
+  // after acceptance, a new BL version re-runs reconciliation and the acceptance is gone
+  const bl = base.commands.find((c) => c.cmd === "RECEIVE" && c.type === "BILL_OF_LADING");
+  const r3 = run(base.dossier, [...base.commands, { ...bl, version: 2, sha: "sha-bl-v2", at: "2026-03-12" }]);
+  assert.equal(r3.reconciliation.acceptedBy, null);
 });

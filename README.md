@@ -6,7 +6,7 @@ each pinned by hand-written shared cases and a JS↔.NET parity gate:
 - **docrecon** — reconciles **Commercial Invoice ↔ Packing List ↔ Bill of Lading** against 22 rules and explains every finding.
 - **docflow** — an event-sourced **dossier workflow**: documents arrive in any order → routed to the responsible role →
   structured fields extracted → docrecon gate → approval → ERP outbox with idempotency keys → notifications →
-  closure only when every required document is approved *and* integrated. 17 rules, 7 document types, 6 roles.
+  closure only when every required document is approved *and* integrated. 18 rules, 7 document types, 6 roles.
 
 Live demos: [dalteno.com/#proof](https://dalteno.com/#proof) (docrecon) · [dalteno.com/lab/docflow/](https://dalteno.com/lab/docflow/) (docflow).
 
@@ -115,6 +115,7 @@ each with an `at` date — into an append-only event list. No clock, no I/O; rep
 | F15 | UNKNOWN_DOCUMENT_TYPE | Types outside the definition are rejected. |
 | F16 | INVALID_COMMAND | No valid ISO date, or unknown verb → rejected. |
 | F17 | MONOTONIC_TIME | A command dated before the latest processed command is rejected — the dossier clock never runs backwards. |
+| F18 | REVIEW_NEEDS_SIGNOFF | Reconciliation `REVIEW` stops the gated approval until someone approves with `acceptWarnings: true` and a written reason; recorded as `ReconciliationWarningsAccepted` with the role. A re-run clears it; `BLOCKED` can never be accepted. |
 
 Dossier definition (data, not code): commercial invoice → FINANCE · packing list → WAREHOUSE · bill of lading →
 LOGISTICS · certificate of origin, customs entry → CUSTOMS_BROKER · insurance certificate → FINANCE ·
@@ -134,6 +135,7 @@ dotnet test                                                # both .NET libraries
 
 | docrecon | date | change |
 |---|---|---|
+| 1.1.0 (docflow) | 2026-10-23 | **Behaviour change.** New rule F18 REVIEW_NEEDS_SIGNOFF: a `REVIEW` reconciliation no longer passes the customs-entry gate silently — approval needs `acceptWarnings: true` + reason and is recorded with the role; re-run clears it. Cases D43–D45. Definition switch `reconciliation.reviewNeedsSignoff` (default true). |
 | 1.1.0 | 2026-10-23 | **Behaviour change.** New rule R22 FIELD_ABSENT: a field another rule reads but which is absent is reported once (WARNING) and the rule is skipped — bundles that previously reconciled as `PASS` with blank dates, parties, weights, package counts or units now return `REVIEW`. Non-numeric weights/package counts/totals are R21 instead of a silent skip. Cases C54–C56, blank-field sweep tests, ADR-0005. |
 | 1.0.0 | 2026-10-15 | First release: 21 rules, 55 shared cases, JS ↔ .NET parity. |
 

@@ -13,7 +13,7 @@ public sealed record DocumentSpec(
     string? Check = null);
 
 /// <summary>Reconciliation gate: which documents feed docrecon and who is told when it is BLOCKED.</summary>
-public sealed record ReconciliationSpec(IReadOnlyList<string> Group, string ComplianceRole);
+public sealed record ReconciliationSpec(IReadOnlyList<string> Group, string ComplianceRole, bool ReviewNeedsSignoff = true);
 
 /// <summary>Outbox target for the existing ERP (adapter name and staging schema).</summary>
 public sealed record IntegrationSpec(string Adapter, string Schema);
@@ -64,5 +64,6 @@ public static class FlowRules
         new("F15", "UNKNOWN_DOCUMENT_TYPE", "A document type outside the dossier definition is rejected."),
         new("F16", "INVALID_COMMAND", "A command without a valid ISO date or with an unknown verb is rejected."),
         new("F17", "MONOTONIC_TIME", "A command dated before the latest processed command is rejected: the dossier clock never runs backwards."),
+        new("F18", "REVIEW_NEEDS_SIGNOFF", "When reconciliation ends in REVIEW, the gated document is approved only with acceptWarnings and a written reason; the acceptance is recorded with the role. A re-run of reconciliation clears it. BLOCKED can never be accepted."),
     };
 }

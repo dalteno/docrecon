@@ -94,6 +94,24 @@ add("D37_ack_key_from_other_dossier", "Key of another dossier → F06", base,
 
 // ── reconciliation gate ──
 const plShort = () => { const p = P.PACKING_LIST(); p.lines[1].qty = "140"; return p; };
+const blNoGross = () => { const b = P.BILL_OF_LADING(); b.grossKg = ""; return b; }; // R22 → REVIEW, no blockers
+const apprAccept = (type, at, reason, role = ROLE[type]) => ({ cmd: "APPROVE", type, role, acceptWarnings: true, reason, at });
+add("D43_review_blocks_without_signoff", "BL without gross weight → reconciliation REVIEW (R22, 0 blockers) → customs entry approval refused (F18); a REVIEW never passes the gate silently", base,
+  [rcv("COMMERCIAL_INVOICE", D0), rcv("PACKING_LIST", D0), rcv("BILL_OF_LADING", D0, 1, blNoGross(), "sha-bl-nogross"), rcv("CERTIFICATE_OF_ORIGIN", D0), appr("CERTIFICATE_OF_ORIGIN", D1), rcv("CUSTOMS_ENTRY", D1), appr("CUSTOMS_ENTRY", D1)],
+  { documents: docs({ COMMERCIAL_INVOICE: "AWAITING_APPROVAL", PACKING_LIST: "AWAITING_APPROVAL", BILL_OF_LADING: "AWAITING_APPROVAL", CERTIFICATE_OF_ORIGIN: "APPROVED", CUSTOMS_ENTRY: "AWAITING_APPROVAL" }),
+    reconciliation: "REVIEW", rejected: ["F18|CUSTOMS_ENTRY"], notifications: 5, integrationQueued: 1 }, { adversarial: true });
+add("D44_review_accepted_with_reason", "Same REVIEW; the broker approves with acceptWarnings and a written reason → accepted, recorded, customs entry approved", base,
+  [rcv("COMMERCIAL_INVOICE", D0), rcv("PACKING_LIST", D0), rcv("BILL_OF_LADING", D0, 1, blNoGross(), "sha-bl-nogross"), rcv("CERTIFICATE_OF_ORIGIN", D0), appr("CERTIFICATE_OF_ORIGIN", D1), rcv("CUSTOMS_ENTRY", D1),
+   apprAccept("CUSTOMS_ENTRY", D1, "gross weight will be taken from the weighbridge certificate")],
+  { documents: docs({ COMMERCIAL_INVOICE: "AWAITING_APPROVAL", PACKING_LIST: "AWAITING_APPROVAL", BILL_OF_LADING: "AWAITING_APPROVAL", CERTIFICATE_OF_ORIGIN: "APPROVED", CUSTOMS_ENTRY: "APPROVED" }),
+    reconciliation: "REVIEW", notifications: 5, integrationQueued: 2 });
+add("D45_signoff_cannot_override_blocked_or_skip_reason", "acceptWarnings without a reason → F18; acceptWarnings on a BLOCKED reconciliation → still F07", base,
+  [rcv("COMMERCIAL_INVOICE", D0), rcv("PACKING_LIST", D0), rcv("BILL_OF_LADING", D0, 1, blNoGross(), "sha-bl-nogross"), rcv("CERTIFICATE_OF_ORIGIN", D0), appr("CERTIFICATE_OF_ORIGIN", D1), rcv("CUSTOMS_ENTRY", D1),
+   apprAccept("CUSTOMS_ENTRY", D1, ""),
+   rcv("PACKING_LIST", D1, 2, plShort(), "sha-pl-short"), apprAccept("CUSTOMS_ENTRY", D1, "trying to force it")],  // same day: no SLA boundary crossed
+  { documents: docs({ COMMERCIAL_INVOICE: "AWAITING_APPROVAL", PACKING_LIST: "AWAITING_APPROVAL", BILL_OF_LADING: "AWAITING_APPROVAL", CERTIFICATE_OF_ORIGIN: "APPROVED", CUSTOMS_ENTRY: "AWAITING_APPROVAL" }),
+    reconciliation: "BLOCKED", rejected: ["F07|CUSTOMS_ENTRY", "F18|CUSTOMS_ENTRY"], notifications: 7, integrationQueued: 1 }, { adversarial: true });
+
 add("D11_reconciliation_blocked", "Packed qty ≠ invoiced → docrecon BLOCKED → compliance notified → customs entry approval refused (F07)", base,
   [rcv("COMMERCIAL_INVOICE", D0), rcv("PACKING_LIST", D0, 1, plShort(), "sha-pl-short"), rcv("BILL_OF_LADING", D0), rcv("CERTIFICATE_OF_ORIGIN", D0), appr("CERTIFICATE_OF_ORIGIN", D1), rcv("CUSTOMS_ENTRY", D1), appr("CUSTOMS_ENTRY", D1)],
   { documents: docs({ COMMERCIAL_INVOICE: "AWAITING_APPROVAL", PACKING_LIST: "AWAITING_APPROVAL", BILL_OF_LADING: "AWAITING_APPROVAL", CERTIFICATE_OF_ORIGIN: "APPROVED", CUSTOMS_ENTRY: "AWAITING_APPROVAL" }),

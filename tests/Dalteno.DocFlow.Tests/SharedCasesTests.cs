@@ -96,8 +96,8 @@ public sealed class SharedCasesTests
     [Fact]
     public void CatalogueAndDefinitionAreStable()
     {
-        Assert.Equal(17, FlowRules.All.Count);
-        Assert.Equal(17, FlowRules.All.Select(r => r.Id).Distinct().Count());
+        Assert.Equal(18, FlowRules.All.Count);
+        Assert.Equal(18, FlowRules.All.Select(r => r.Id).Distinct().Count());
         Assert.Equal(7, DossierDefinition.Default.Documents.Count);
         Assert.Equal(6, DossierDefinition.Default.Documents.Count(d => d.Required));
     }
@@ -109,5 +109,34 @@ public sealed class SharedCasesTests
         Assert.Equal("OPEN", r.Status);
         Assert.Empty(r.Events);
         Assert.All(r.Documents.Values, d => Assert.Equal("MISSING", d.Status));
+    }
+
+    [Fact]
+    public void F18_ReviewStopsTheGatedApproval_AcceptanceIsRecorded_RerunClearsIt()
+    {
+        // The flow must STOP on REVIEW, not merely "not be PASS" (external review, 23 Oct). Mirrors docflow.test.mjs.
+        var c = JsonNode.Parse(File.ReadAllText(Path.Combine(CasesDir, "D44_review_accepted_with_reason.json")))!.AsObject();
+        var dossier = c["dossier"] as JsonObject; var commands = (c["commands"] as JsonArray)!;
+        var r1 = Engine.Run(JsonNode.Parse(dossier!.ToJsonString()) as JsonObject, JsonNode.Parse(commands.ToJsonString()) as JsonArray);
+        Assert.Equal("REVIEW", r1.Reconciliation!.Status);
+        Assert.Equal("APPROVED", r1.Documents["CUSTOMS_ENTRY"].Status);
+        Assert.NotNull(r1.Reconciliation.AcceptedBy);
+        Assert.Equal("CUSTOMS_BROKER", r1.Reconciliation.AcceptedBy!.Role);
+        Assert.Single(r1.Events, e => (string?)e["type"] == "ReconciliationWarningsAccepted");
+
+        // same commands without the acceptance flag → F18, document stays AWAITING_APPROVAL
+        var stripped = JsonNode.Parse(commands.ToJsonString())!.AsArray();
+        foreach (var n in stripped) if (n is JsonObject o && (string?)o["cmd"] == "APPROVE" && (string?)o["type"] == "CUSTOMS_ENTRY") { o.Remove("acceptWarnings"); o.Remove("reason"); }
+        var r2 = Engine.Run(JsonNode.Parse(dossier.ToJsonString()) as JsonObject, stripped);
+        Assert.Equal("AWAITING_APPROVAL", r2.Documents["CUSTOMS_ENTRY"].Status);
+        Assert.Contains(r2.Rejected, x => x.Rule == "F18");
+
+        // a new BL version re-runs reconciliation and the acceptance is gone
+        var extended = JsonNode.Parse(commands.ToJsonString())!.AsArray();
+        var bl = extended.First(n => n is JsonObject o && (string?)o["cmd"] == "RECEIVE" && (string?)o["type"] == "BILL_OF_LADING")!.AsObject();
+        var bl2 = JsonNode.Parse(bl.ToJsonString())!.AsObject(); bl2["version"] = 2; bl2["sha"] = "sha-bl-v2"; bl2["at"] = "2026-03-12";
+        extended.Add(bl2);
+        var r3 = Engine.Run(JsonNode.Parse(dossier.ToJsonString()) as JsonObject, extended);
+        Assert.Null(r3.Reconciliation!.AcceptedBy);
     }
 }
