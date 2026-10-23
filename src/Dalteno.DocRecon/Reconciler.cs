@@ -49,6 +49,18 @@ public static class Reconciler
         }
         static bool Has(string? v) => v is not null && v.Trim().Length > 0;
         static bool Given(string? v) => v is { Length: > 0 }; // JS truthiness: "" is absent, " " is present
+        // R22: a field some rule needs but which is not structurally required. Absent → one WARNING per field; the dependent rule is skipped.
+        // Non-numeric where a number is expected → R21 (fail loud), never silently skipped. Mirrors isAbsent/absent/num/text in web/docrecon.js.
+        static bool IsAbsent(string? v) => v is null || v.Trim().Length == 0;
+        void Absent(string name, string key, string field, string needs) => Add("R22", key, field, "present", "absent", $"{key} is absent; {needs} could not run.", name);
+        BigInteger? Num(string name, string key, string field, string? value, int scale, string needs)
+        {
+            if (IsAbsent(value)) { Absent(name, key, field, needs); return null; }
+            var m = ToMinor(value, scale);
+            if (m is null) Add("R21", key, field, "number", value, $"{key} is not a number.", name);
+            return m;
+        }
+        bool Text(string name, string key, string field, string? value, string needs) { if (IsAbsent(value)) { Absent(name, key, field, needs); return false; } return true; }
         var invNo = Req(inv, "invoice", "number", () => Has(inv!.Number));
         var invCur = Req(inv, "invoice", "currency", () => Has(inv!.Currency));
         var invLines = Req(inv, "invoice", "lines", () => inv!.Lines is { Count: > 0 });
@@ -68,7 +80,6 @@ public static class Reconciler
                 Add("R16", $"{name}:{sku}:{field}", field, "> 0", FromMinor(minor, scale), $"{name} line {idx + 1} ({sku}) has a non-positive {field}.", name);
             }
         }
-        static bool HsGiven(string? hs) => hs is not null && hs.Length > 0;
 
         if (invLines)
         {
@@ -91,8 +102,10 @@ public static class Reconciler
                 }
                 if (invCur && Given(ln.Currency) && NormKey(ln.Currency) != NormKey(inv.Currency))
                     Add("R08", sku, "currency", NormKey(inv.Currency), NormKey(ln.Currency), $"Line {sku} is priced in {NormKey(ln.Currency)} but the invoice currency is {NormKey(inv.Currency)}.", "invoice");
+                Text("invoice", $"invoice:{sku}:unit", "unit", ln.Unit, "R19 (unit of measure)");
                 var hs = NormHs(ln.HsCode);
-                if (HsGiven(ln.HsCode) && !IsValidHs(hs))
+                if (IsAbsent(ln.HsCode)) Absent("invoice", $"invoice:{sku}:hsCode", "hsCode", "R13/R14 (HS code)");
+                else if (!IsValidHs(hs))
                     Add("R13", $"invoice:{sku}", "hsCode", "6–10 digits", ln.HsCode, $"Invoice line {sku}: HS code \"{ln.HsCode}\" is not 6–10 digits.", "invoice");
                 if (invBySku.TryGetValue(sku, out var agg))
                 {
@@ -116,14 +129,19 @@ public static class Reconciler
                 var ln = pl.Lines[i] ?? new PackingLine();
                 var sku = NormKey(ln.Sku);
                 if (sku.Length == 0) { Add("R21", $"packingList.lines[{i}].sku", "sku", "present", "absent", $"Packing line {i + 1} has no SKU.", "packingList"); continue; }
-                var qty = ToMinor(ln.Qty, Scale.Qty); var net = ToMinor(ln.NetKg, Scale.Kg); var gross = ToMinor(ln.GrossKg, Scale.Kg); var pk = ToMinor(ln.Packages, Scale.Unit);
+                var qty = ToMinor(ln.Qty, Scale.Qty);
+                var net = Num("packingList", $"packingList:{sku}:netKg", "netKg", ln.NetKg, Scale.Kg, "R10/R20 (weights)");
+                var gross = Num("packingList", $"packingList:{sku}:grossKg", "grossKg", ln.GrossKg, Scale.Kg, "R09/R10/R20 (weights)");
+                var pk = Num("packingList", $"packingList:{sku}:packages", "packages", ln.Packages, Scale.Unit, "R11/R20 (package count)");
+                Text("packingList", $"packingList:{sku}:unit", "unit", ln.Unit, "R19 (unit of measure)");
                 NonPositive("packingList", i, sku, "qty", qty); NonPositive("packingList", i, sku, "netKg", net); NonPositive("packingList", i, sku, "grossKg", gross);
                 if (pk is not null && pk.Value <= 0) Add("R16", $"packingList:{sku}:packages", "packages", "> 0", FromMinor(pk, Scale.Unit), $"Packing line {i + 1} ({sku}) has a non-positive package count.", "packingList");
                 if (qty is null) Add("R21", $"packingList:{sku}:qty", "qty", "number", ln.Qty ?? "absent", $"Packing line {sku}: qty is not a number.", "packingList");
                 if (net is not null && gross is not null && net.Value > gross.Value)
                     Add("R10", sku, "netKg", $"≤ gross {FromMinor(gross, Scale.Kg)}", FromMinor(net, Scale.Kg), $"Packing line {sku}: net {FromMinor(net, Scale.Kg)} kg exceeds gross {FromMinor(gross, Scale.Kg)} kg.", "packingList");
                 var hs = NormHs(ln.HsCode);
-                if (HsGiven(ln.HsCode) && !IsValidHs(hs))
+                if (IsAbsent(ln.HsCode)) Absent("packingList", $"packingList:{sku}:hsCode", "hsCode", "R14 (HS code)");
+                else if (!IsValidHs(hs))
                     Add("R13", $"packingList:{sku}", "hsCode", "6–10 digits", ln.HsCode, $"Packing line {sku}: HS code \"{ln.HsCode}\" is not 6–10 digits.", "packingList");
                 if (plBySku.TryGetValue(sku, out var agg))
                 {
@@ -166,7 +184,7 @@ public static class Reconciler
                     Add("R07", "invoice", "total", FromMinor(sumLines, Scale.Money), FromMinor(total, Scale.Money), $"Line totals sum to {FromMinor(sumLines, Scale.Money)}, invoice total is {FromMinor(total, Scale.Money)}.", "invoice");
             }
         }
-        if (inv is not null && Given(inv.Incoterm) && !opt.KnownIncoterms.Contains(NormKey(inv.Incoterm)))
+        if (inv is not null && Text("invoice", "invoice.incoterm", "incoterm", inv.Incoterm, "R18 (Incoterm)") && !opt.KnownIncoterms.Contains(NormKey(inv.Incoterm)))
             Add("R18", "invoice", "incoterm", string.Join('/', opt.KnownIncoterms), inv.Incoterm, $"Incoterm \"{inv.Incoterm}\" is not an Incoterms 2020 code.", "invoice");
 
         // ── packing list totals vs its lines ──
@@ -182,7 +200,7 @@ public static class Reconciler
             }
             BigInteger? Chk(string field, string? declared, BigInteger s, bool complete, int scale)
             {
-                var d = ToMinor(declared, scale);
+                var d = Num("packingList", $"packingList.{field}", field, declared, scale, "R20 (packing totals)");
                 if (d is null) return complete ? s : null;
                 if (complete && d.Value != s)
                     Add("R20", field, field, FromMinor(s, scale), FromMinor(d, scale), $"Packing list declares {field} {FromMinor(d, scale)}, lines sum to {FromMinor(s, scale)}.", "packingList");
@@ -212,7 +230,7 @@ public static class Reconciler
         // ── BL vs packing list physicals ──
         if (bl is not null && plLines)
         {
-            var blGross = ToMinor(bl.GrossKg, Scale.Kg); var blPk = ToMinor(bl.Packages, Scale.Unit);
+            var blGross = Num("billOfLading", "billOfLading.grossKg", "grossKg", bl.GrossKg, Scale.Kg, "R09 (gross weight)"); var blPk = Num("billOfLading", "billOfLading.packages", "packages", bl.Packages, Scale.Unit, "R11 (package count)");
             if (blGross is not null && blGross.Value <= 0) Add("R16", "billOfLading:grossKg", "grossKg", "> 0", FromMinor(blGross, Scale.Kg), "Bill of lading gross weight is non-positive.", "billOfLading");
             if (blPk is not null && blPk.Value <= 0) Add("R16", "billOfLading:packages", "packages", "> 0", FromMinor(blPk, Scale.Unit), "Bill of lading package count is non-positive.", "billOfLading");
             if (blGross is not null && plGross is not null && blGross.Value > 0 && plGross.Value > 0 && ExceedsTolerance(blGross.Value, plGross.Value, opt.WeightToleranceBp))
@@ -222,7 +240,9 @@ public static class Reconciler
         }
 
         // ── parties ──
-        if (inv is not null && bl is not null && Given(inv.Buyer) && Given(bl.Consignee))
+        var hasBuyer = inv is not null && Text("invoice", "invoice.buyer", "buyer", inv.Buyer, "R17 (consignee match)");
+        var hasConsignee = bl is not null && Text("billOfLading", "billOfLading.consignee", "consignee", bl.Consignee, "R17 (consignee match)");
+        if (hasBuyer && hasConsignee)
         {
             var a = NormParty(inv.Buyer, opt.LegalSuffixes); var b = NormParty(bl.Consignee, opt.LegalSuffixes);
             if (a != b) Add("R17", "consignee", "consignee", inv.Buyer, bl.Consignee, $"BL consignee \"{bl.Consignee}\" does not match invoice buyer \"{inv.Buyer}\" after normalisation ({a} ≠ {b}).", "invoice", "billOfLading");
@@ -232,9 +252,9 @@ public static class Reconciler
         var di = inv is null ? null : DayNumber(inv.Date);
         var dp = pl is null ? null : DayNumber(pl.Date);
         var db = bl is null ? null : DayNumber(bl.Date);
-        if (inv is not null && Given(inv.Date) && di is null) Add("R21", "invoice.date", "date", "YYYY-MM-DD", inv.Date, "Invoice date is not a valid ISO date.", "invoice");
-        if (pl is not null && Given(pl.Date) && dp is null) Add("R21", "packingList.date", "date", "YYYY-MM-DD", pl.Date, "Packing list date is not a valid ISO date.", "packingList");
-        if (bl is not null && Given(bl.Date) && db is null) Add("R21", "billOfLading.date", "date", "YYYY-MM-DD", bl.Date, "Bill of lading date is not a valid ISO date.", "billOfLading");
+        if (inv is not null && IsAbsent(inv.Date)) Absent("invoice", "invoice.date", "date", "R12 (date order)"); else if (inv is not null && di is null) Add("R21", "invoice.date", "date", "YYYY-MM-DD", inv.Date, "Invoice date is not a valid ISO date.", "invoice");
+        if (pl is not null && IsAbsent(pl.Date)) Absent("packingList", "packingList.date", "date", "R12 (date order)"); else if (pl is not null && dp is null) Add("R21", "packingList.date", "date", "YYYY-MM-DD", pl.Date, "Packing list date is not a valid ISO date.", "packingList");
+        if (bl is not null && IsAbsent(bl.Date)) Absent("billOfLading", "billOfLading.date", "date", "R12 (date order)"); else if (bl is not null && db is null) Add("R21", "billOfLading.date", "date", "YYYY-MM-DD", bl.Date, "Bill of lading date is not a valid ISO date.", "billOfLading");
         if (di is not null && dp is not null && di > dp) Add("R12", "invoice>packing", "date", "invoice ≤ packing", $"{inv!.Date} > {pl!.Date}", $"Invoice ({inv.Date}) is dated after the packing list ({pl.Date}).", "invoice", "packingList");
         if (dp is not null && db is not null && dp > db) Add("R12", "packing>bl", "date", "packing ≤ shipped on board", $"{pl!.Date} > {bl!.Date}", $"Packing list ({pl.Date}) is dated after shipped-on-board ({bl.Date}).", "packingList", "billOfLading");
         if (di is not null && db is not null && db - di > opt.MaxDocumentSpanDays) Add("R12", "span", "date", $"≤ {opt.MaxDocumentSpanDays} days", $"{db - di} days", $"{db - di} days between invoice and shipped-on-board exceeds {opt.MaxDocumentSpanDays}.", "invoice", "billOfLading");

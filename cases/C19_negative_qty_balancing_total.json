@@ -45,7 +45,8 @@
           "qty": "-1",
           "unit": "PCS",
           "unitPrice": "100.00",
-          "lineTotal": "-100.00"
+          "lineTotal": "-100.00",
+          "hsCode": "7318.21"
         }
       ]
     },
@@ -91,7 +92,8 @@
           "unit": "PCS",
           "packages": "1",
           "netKg": "0.100",
-          "grossKg": "0.200"
+          "grossKg": "0.200",
+          "hsCode": "7318.21"
         }
       ]
     },

@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 22,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 3,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R22",
+      "code": "FIELD_ABSENT",
+      "severity": "WARNING",
+      "key": "billOfLading.consignee",
+      "field": "consignee",
+      "expected": "present",
+      "actual": "absent",
+      "reason": "billOfLading.consignee is absent; R17 (consignee match) could not run.",
+      "documents": [
+        "billOfLading"
+      ]
+    },
+    {
+      "rule": "R22",
+      "code": "FIELD_ABSENT",
+      "severity": "WARNING",
+      "key": "billOfLading.grossKg",
+      "field": "grossKg",
+      "expected": "present",
+      "actual": "absent",
+      "reason": "billOfLading.grossKg is absent; R09 (gross weight) could not run.",
+      "documents": [
+        "billOfLading"
+      ]
+    },
+    {
+      "rule": "R22",
+      "code": "FIELD_ABSENT",
+      "severity": "WARNING",
+      "key": "packingList.date",
+      "field": "date",
+      "expected": "present",
+      "actual": "absent",
+      "reason": "packingList.date is absent; R12 (date order) could not run.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

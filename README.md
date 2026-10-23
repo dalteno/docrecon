@@ -3,7 +3,7 @@
 Two small, dependency-free engines for the paperwork behind a sea shipment, each in .NET 10 and JavaScript,
 each pinned by hand-written shared cases and a JS↔.NET parity gate:
 
-- **docrecon** — reconciles **Commercial Invoice ↔ Packing List ↔ Bill of Lading** against 21 rules and explains every finding.
+- **docrecon** — reconciles **Commercial Invoice ↔ Packing List ↔ Bill of Lading** against 22 rules and explains every finding.
 - **docflow** — an event-sourced **dossier workflow**: documents arrive in any order → routed to the responsible role →
   structured fields extracted → docrecon gate → approval → ERP outbox with idempotency keys → notifications →
   closure only when every required document is approved *and* integrated. 17 rules, 7 document types, 6 roles.
@@ -19,14 +19,14 @@ Two implementations, one rule catalogue, one set of shared cases:
 | | .NET 10 (`src/Dalteno.DocRecon`) | JavaScript (`web/docrecon.js`) |
 |---|---|---|
 | purpose | production library (ERP / customs-broker back office) | same rules in the browser — the live demo on [dalteno.com](https://dalteno.com) |
-| tests | xUnit: 56 shared cases + helper tests | `node --test`: 56 shared cases + helper tests |
+| tests | xUnit: 59 shared cases + helper tests | `node --test`: 59 shared cases + helper tests |
 | parity | every case must reproduce the JS **golden report** field by field | every case must match the hand-written expectation |
 
 CI runs both. A change that makes the two engines disagree fails the build.
 
 ## What it checks
 
-21 rules (`R01`–`R21`), each with a stable id, a severity and a one-line contract.
+22 rules (`R01`–`R22`), each with a stable id, a severity and a one-line contract.
 Every finding tells you **which rule, which field, what was expected, what was found, and why** — never a bare "mismatch".
 
 | id | code | severity | contract |
@@ -51,7 +51,8 @@ Every finding tells you **which rule, which field, what was expected, what was f
 | R18 | INCOTERM_UNKNOWN | INFO | Incoterms 2020 code. |
 | R19 | UNIT_MISMATCH | BLOCKER | Unit of measure agrees per SKU. |
 | R20 | PACKING_TOTALS_ARITHMETIC | WARNING | Packing totals = Σ lines. |
-| R21 | MISSING_REQUIRED | BLOCKER | Required document / field / line set present. |
+| R21 | MISSING_REQUIRED | BLOCKER | Required document / field / line set present; a non-number where a number is expected. |
+| R22 | FIELD_ABSENT | WARNING | A field another rule reads is absent → reported once, the rule is skipped. Absence is never a match. |
 
 Report status: any BLOCKER → `BLOCKED`; else any WARNING → `REVIEW`; else `PASS`.
 
@@ -61,9 +62,10 @@ Report status: any BLOCKER → `BLOCKED`; else any WARNING → `REVIEW`; else `P
    `3 × 0.10` is `0.30`, not `0.30000000000000004`. Rounding is half-away-from-zero and is itself under test.
 2. **Tolerances are integers too** — basis points and minor units — so "2 %" means the same thing in both engines.
 3. **Pure function.** No I/O, no clock, no randomness, input never mutated. Same bundle + same options ⇒ identical report.
-4. **Fail loud, never guess.** A non-numeric quantity is a finding (`R21`), not an exception and not a silent zero.
-   Absent data is skipped by the rules that need it and reported once.
-5. **The cases are the spec.** `cases/generate.mjs` holds 56 hand-written expectations (19 adversarial: float traps, European number formats,
+4. **Fail loud, never guess.** A non-numeric value is a finding (`R21`), not an exception and not a silent zero.
+   A field a rule reads but which is absent is a finding too (`R22`, once per field) — the rule is skipped, and absence is never treated as a match.
+   Fields no rule reads (seller, shipper, ports, descriptions) are not reported.
+5. **The cases are the spec.** `cases/generate.mjs` holds 59 hand-written expectations (22 adversarial: float traps, European number formats,
    half-cent rounding, negative lines that balance the total, duplicate SKUs, legal-suffix variants, leap days, boundary
    tolerances). Expectations are never derived from the engine.
 

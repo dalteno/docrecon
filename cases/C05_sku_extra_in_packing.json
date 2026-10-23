@@ -84,7 +84,8 @@
           "unit": "PCS",
           "packages": "1",
           "netKg": "20.000",
-          "grossKg": "22.000"
+          "grossKg": "22.000",
+          "hsCode": "7318.15"
         }
       ]
     },

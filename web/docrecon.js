@@ -51,6 +51,7 @@ export const RULES = Object.freeze([
   r("R19", "UNIT_MISMATCH", SEVERITY.BLOCKER, "Unit of measure must agree per SKU between invoice and packing list."),
   r("R20", "PACKING_TOTALS_ARITHMETIC", SEVERITY.WARNING, "Packing-list totals must equal the sum of their lines (packages, net, gross)."),
   r("R21", "MISSING_REQUIRED", SEVERITY.BLOCKER, "A required document, field or line set is absent."),
+  r("R22", "FIELD_ABSENT", SEVERITY.WARNING, "A field another rule needs is absent, so that rule could not run. Reported once per field; absence is never treated as a match."),
 ]);
 function r(id, code, severity, contract) { return Object.freeze({ id, code, severity, contract }); }
 const RULE_BY_ID = Object.fromEntries(RULES.map((x) => [x.id, x]));
@@ -156,6 +157,17 @@ export function reconcile(bundle, options = {}) {
     if (!ok) add("R21", `${name}.${field}`, field, "present", "absent", `${name}.${field} is required.`, [name]);
     return ok;
   };
+  // R22: a field some rule needs but which is not structurally required. Absent → one WARNING per field; the dependent rule is skipped.
+  // Non-numeric where a number is expected → R21 (fail loud), never silently skipped.
+  const isAbsent = (v) => v === null || v === undefined || String(v).trim() === "";
+  const absent = (name, key, field, needs) => add("R22", key, field, "present", "absent", `${key} is absent; ${needs} could not run.`, [name]);
+  const num = (name, key, field, value, scale, needs) => {
+    if (isAbsent(value)) { absent(name, key, field, needs); return null; }
+    const m = toMinor(value, scale);
+    if (m === null) add("R21", key, field, "number", String(value), `${key} is not a number.`, [name]);
+    return m;
+  };
+  const text = (name, key, field, value, needs) => { if (isAbsent(value)) { absent(name, key, field, needs); return false; } return true; };
   const invNo = req(inv, "invoice", "number"), invCur = req(inv, "invoice", "currency"), invLines = req(inv, "invoice", "lines"), invTotal = req(inv, "invoice", "total");
   const plNo = req(pl, "packingList", "number"), plLines = req(pl, "packingList", "lines");
   req(bl, "billOfLading", "number");
@@ -180,8 +192,10 @@ export function reconcile(bundle, options = {}) {
         if (diff > BigInt(opt.amountToleranceMinor)) add("R06", sku, "lineTotal", fromMinor(calc, SCALE.MONEY), fromMinor(total, SCALE.MONEY), `${fromMinor(qty, SCALE.QTY)} × ${fromMinor(price, SCALE.MONEY)} = ${fromMinor(calc, SCALE.MONEY)}, invoice says ${fromMinor(total, SCALE.MONEY)}.`, ["invoice"]);
       }
       if (invCur && ln.currency && normKey(ln.currency) !== normKey(inv.currency)) add("R08", sku, "currency", normKey(inv.currency), normKey(ln.currency), `Line ${sku} is priced in ${normKey(ln.currency)} but the invoice currency is ${normKey(inv.currency)}.`, ["invoice"]);
+      text("invoice", `invoice:${sku}:unit`, "unit", ln.unit, "R19 (unit of measure)");
       const hs = normHs(ln.hsCode);
-      if (ln.hsCode !== undefined && ln.hsCode !== null && String(ln.hsCode) !== "" && !/^\d{6,10}$/.test(hs)) add("R13", `invoice:${sku}`, "hsCode", "6–10 digits", String(ln.hsCode), `Invoice line ${sku}: HS code "${ln.hsCode}" is not 6–10 digits.`, ["invoice"]);
+      if (isAbsent(ln.hsCode)) absent("invoice", `invoice:${sku}:hsCode`, "hsCode", "R13/R14 (HS code)");
+      else if (!/^\d{6,10}$/.test(hs)) add("R13", `invoice:${sku}`, "hsCode", "6–10 digits", String(ln.hsCode), `Invoice line ${sku}: HS code "${ln.hsCode}" is not 6–10 digits.`, ["invoice"]);
       const agg = invBySku.get(sku);
       if (agg) {
         if ((price !== null && agg.price !== null && price !== agg.price) || (hs && agg.hs && hs !== agg.hs)) {
@@ -196,13 +210,18 @@ export function reconcile(bundle, options = {}) {
       const ln = raw !== null && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
       const sku = normKey(ln.sku);
       if (!sku) { add("R21", `packingList.lines[${i}].sku`, "sku", "present", "absent", `Packing line ${i + 1} has no SKU.`, ["packingList"]); return; }
-      const qty = toMinor(ln.qty, SCALE.QTY), net = toMinor(ln.netKg, SCALE.KG), gross = toMinor(ln.grossKg, SCALE.KG), pk = toMinor(ln.packages, 1);
+      const qty = toMinor(ln.qty, SCALE.QTY);
+      const net = num("packingList", `packingList:${sku}:netKg`, "netKg", ln.netKg, SCALE.KG, "R10/R20 (weights)");
+      const gross = num("packingList", `packingList:${sku}:grossKg`, "grossKg", ln.grossKg, SCALE.KG, "R09/R10/R20 (weights)");
+      const pk = num("packingList", `packingList:${sku}:packages`, "packages", ln.packages, 1, "R11/R20 (package count)");
+      text("packingList", `packingList:${sku}:unit`, "unit", ln.unit, "R19 (unit of measure)");
       nonPositive(pl, "packingList", i, sku, "qty", qty); nonPositive(pl, "packingList", i, sku, "netKg", net); nonPositive(pl, "packingList", i, sku, "grossKg", gross);
       if (pk !== null && pk <= 0n) add("R16", `packingList:${sku}:packages`, "packages", "> 0", fromMinor(pk, 1), `Packing line ${i + 1} (${sku}) has a non-positive package count.`, ["packingList"]);
       if (qty === null) add("R21", `packingList:${sku}:qty`, "qty", "number", String(ln.qty ?? "absent"), `Packing line ${sku}: qty is not a number.`, ["packingList"]);
       if (net !== null && gross !== null && net > gross) add("R10", sku, "netKg", `≤ gross ${fromMinor(gross, SCALE.KG)}`, fromMinor(net, SCALE.KG), `Packing line ${sku}: net ${fromMinor(net, SCALE.KG)} kg exceeds gross ${fromMinor(gross, SCALE.KG)} kg.`, ["packingList"]);
       const hs = normHs(ln.hsCode);
-      if (ln.hsCode !== undefined && ln.hsCode !== null && String(ln.hsCode) !== "" && !/^\d{6,10}$/.test(hs)) add("R13", `packingList:${sku}`, "hsCode", "6–10 digits", String(ln.hsCode), `Packing line ${sku}: HS code "${ln.hsCode}" is not 6–10 digits.`, ["packingList"]);
+      if (isAbsent(ln.hsCode)) absent("packingList", `packingList:${sku}:hsCode`, "hsCode", "R14 (HS code)");
+      else if (!/^\d{6,10}$/.test(hs)) add("R13", `packingList:${sku}`, "hsCode", "6–10 digits", String(ln.hsCode), `Packing line ${sku}: HS code "${ln.hsCode}" is not 6–10 digits.`, ["packingList"]);
       const agg = plBySku.get(sku);
       if (agg) { agg.qty = qty === null || agg.qty === null ? null : agg.qty + qty; agg.net = sum(agg.net, net); agg.gross = sum(agg.gross, gross); agg.pk = sum(agg.pk, pk); if (!agg.hs) agg.hs = hs; }
       else plBySku.set(sku, { qty, net, gross, pk, hs, unit: normKey(ln.unit) });
@@ -229,7 +248,7 @@ export function reconcile(bundle, options = {}) {
     if (total === null) add("R21", "invoice.total", "total", "number", String(inv.total), "Invoice total is not a number.", ["invoice"]);
     else if (complete) { const diff = sumLines > total ? sumLines - total : total - sumLines; if (diff > BigInt(opt.amountToleranceMinor)) add("R07", "invoice", "total", fromMinor(sumLines, SCALE.MONEY), fromMinor(total, SCALE.MONEY), `Line totals sum to ${fromMinor(sumLines, SCALE.MONEY)}, invoice total is ${fromMinor(total, SCALE.MONEY)}.`, ["invoice"]); }
   }
-  if (inv && inv.incoterm !== undefined && inv.incoterm !== null && String(inv.incoterm) !== "" && !opt.knownIncoterms.includes(normKey(inv.incoterm))) add("R18", "invoice", "incoterm", opt.knownIncoterms.join("/"), String(inv.incoterm), `Incoterm "${inv.incoterm}" is not an Incoterms 2020 code.`, ["invoice"]);
+  if (inv && text("invoice", "invoice.incoterm", "incoterm", inv.incoterm, "R18 (Incoterm)") && !opt.knownIncoterms.includes(normKey(inv.incoterm))) add("R18", "invoice", "incoterm", opt.knownIncoterms.join("/"), String(inv.incoterm), `Incoterm "${inv.incoterm}" is not an Incoterms 2020 code.`, ["invoice"]);
 
   // ── packing list totals vs its lines ──
   let plPk = null, plNet = null, plGross = null;
@@ -237,7 +256,7 @@ export function reconcile(bundle, options = {}) {
     let sPk = 0n, sNet = 0n, sGross = 0n, cPk = true, cNet = true, cGross = true;
     for (const b of plBySku.values()) { if (b.pk === null) cPk = false; else sPk += b.pk; if (b.net === null) cNet = false; else sNet += b.net; if (b.gross === null) cGross = false; else sGross += b.gross; }
     const chk = (field, declared, s, complete, scale) => {
-      const d = toMinor(declared, scale);
+      const d = num("packingList", `packingList.${field}`, field, declared, scale, "R20 (packing totals)");
       if (d === null) return complete ? s : null;
       if (complete && d !== s) add("R20", field, field, fromMinor(s, scale), fromMinor(d, scale), `Packing list declares ${field} ${fromMinor(d, scale)}, lines sum to ${fromMinor(s, scale)}.`, ["packingList"]);
       return d;
@@ -252,7 +271,7 @@ export function reconcile(bundle, options = {}) {
 
   // ── BL vs packing list physicals ──
   if (bl && plLines) {
-    const blGross = toMinor(bl.grossKg, SCALE.KG), blPk = toMinor(bl.packages, 1);
+    const blGross = num("billOfLading", "billOfLading.grossKg", "grossKg", bl.grossKg, SCALE.KG, "R09 (gross weight)"), blPk = num("billOfLading", "billOfLading.packages", "packages", bl.packages, 1, "R11 (package count)");
     if (blGross !== null && blGross <= 0n) add("R16", "billOfLading:grossKg", "grossKg", "> 0", fromMinor(blGross, SCALE.KG), "Bill of lading gross weight is non-positive.", ["billOfLading"]);
     if (blPk !== null && blPk <= 0n) add("R16", "billOfLading:packages", "packages", "> 0", fromMinor(blPk, 1), "Bill of lading package count is non-positive.", ["billOfLading"]);
     if (blGross !== null && plGross !== null && blGross > 0n && plGross > 0n && exceedsTolerance(blGross, plGross, opt.weightToleranceBp)) add("R09", "grossKg", "grossKg", fromMinor(plGross, SCALE.KG), fromMinor(blGross, SCALE.KG), `BL gross ${fromMinor(blGross, SCALE.KG)} kg vs packing ${fromMinor(plGross, SCALE.KG)} kg exceeds ${opt.weightToleranceBp / 100} % tolerance.`, ["packingList", "billOfLading"]);
@@ -260,13 +279,15 @@ export function reconcile(bundle, options = {}) {
   }
 
   // ── parties ──
-  if (inv && bl && inv.buyer && bl.consignee) { const a = normParty(inv.buyer, opt.legalSuffixes), b = normParty(bl.consignee, opt.legalSuffixes); if (a !== b) add("R17", "consignee", "consignee", String(inv.buyer), String(bl.consignee), `BL consignee "${bl.consignee}" does not match invoice buyer "${inv.buyer}" after normalisation (${a} ≠ ${b}).`, ["invoice", "billOfLading"]); }
+  const hasBuyer = inv ? text("invoice", "invoice.buyer", "buyer", inv.buyer, "R17 (consignee match)") : false;
+  const hasConsignee = bl ? text("billOfLading", "billOfLading.consignee", "consignee", bl.consignee, "R17 (consignee match)") : false;
+  if (hasBuyer && hasConsignee) { const a = normParty(inv.buyer, opt.legalSuffixes), b = normParty(bl.consignee, opt.legalSuffixes); if (a !== b) add("R17", "consignee", "consignee", String(inv.buyer), String(bl.consignee), `BL consignee "${bl.consignee}" does not match invoice buyer "${inv.buyer}" after normalisation (${a} ≠ ${b}).`, ["invoice", "billOfLading"]); }
 
   // ── dates ──
   const di = inv ? dayNumber(inv.date) : null, dp = pl ? dayNumber(pl.date) : null, db = bl ? dayNumber(bl.date) : null;
-  if (inv && inv.date && di === null) add("R21", "invoice.date", "date", "YYYY-MM-DD", String(inv.date), "Invoice date is not a valid ISO date.", ["invoice"]);
-  if (pl && pl.date && dp === null) add("R21", "packingList.date", "date", "YYYY-MM-DD", String(pl.date), "Packing list date is not a valid ISO date.", ["packingList"]);
-  if (bl && bl.date && db === null) add("R21", "billOfLading.date", "date", "YYYY-MM-DD", String(bl.date), "Bill of lading date is not a valid ISO date.", ["billOfLading"]);
+  if (inv && isAbsent(inv.date)) absent("invoice", "invoice.date", "date", "R12 (date order)"); else if (inv && di === null) add("R21", "invoice.date", "date", "YYYY-MM-DD", String(inv.date), "Invoice date is not a valid ISO date.", ["invoice"]);
+  if (pl && isAbsent(pl.date)) absent("packingList", "packingList.date", "date", "R12 (date order)"); else if (pl && dp === null) add("R21", "packingList.date", "date", "YYYY-MM-DD", String(pl.date), "Packing list date is not a valid ISO date.", ["packingList"]);
+  if (bl && isAbsent(bl.date)) absent("billOfLading", "billOfLading.date", "date", "R12 (date order)"); else if (bl && db === null) add("R21", "billOfLading.date", "date", "YYYY-MM-DD", String(bl.date), "Bill of lading date is not a valid ISO date.", ["billOfLading"]);
   if (di !== null && dp !== null && di > dp) add("R12", "invoice>packing", "date", `invoice ≤ packing`, `${inv.date} > ${pl.date}`, `Invoice (${inv.date}) is dated after the packing list (${pl.date}).`, ["invoice", "packingList"]);
   if (dp !== null && db !== null && dp > db) add("R12", "packing>bl", "date", `packing ≤ shipped on board`, `${pl.date} > ${bl.date}`, `Packing list (${pl.date}) is dated after shipped-on-board (${bl.date}).`, ["packingList", "billOfLading"]);
   if (di !== null && db !== null && db - di > opt.maxDocumentSpanDays) add("R12", "span", "date", `≤ ${opt.maxDocumentSpanDays} days`, `${db - di} days`, `${db - di} days between invoice and shipped-on-board exceeds ${opt.maxDocumentSpanDays}.`, ["invoice", "billOfLading"]);

@@ -80,9 +80,9 @@ test("normParty strips punctuation and one trailing legal suffix", () => {
   assert.equal(normParty("GmbH", DEFAULT_OPTIONS.legalSuffixes), "GMBH"); // never reduce to empty
 });
 
-test("rule catalogue is stable: 21 rules, unique ids", () => {
-  assert.equal(RULES.length, 21);
-  assert.equal(new Set(RULES.map((r) => r.id)).size, 21);
+test("rule catalogue is stable: 22 rules, unique ids", () => {
+  assert.equal(RULES.length, 22);
+  assert.equal(new Set(RULES.map((r) => r.id)).size, 22);
 });
 
 test("golden reports (if present) match the current engine output exactly", () => {
@@ -107,5 +107,38 @@ test("non-object line entries never throw: null, number, string, array → R21 f
     const r = reconcile(b, {});
     assert.ok(r.findings.some((f) => f.rule === "R21" && f.key === "invoice.lines[0].sku"), `invoice ${String(bad)}`);
     assert.ok(r.findings.some((f) => f.rule === "R21" && f.key === "packingList.lines[1].sku"), `packing ${String(bad)}`);
+  }
+});
+
+// Absence is never a match. Every field some rule reads must produce a finding when blanked — a sweep, not a hand-picked list,
+// so a future rule that reads a new field without declaring it shows up here.
+const RULE_READ_FIELDS = {
+  invoice: ["number", "date", "currency", "incoterm", "buyer", "total"],
+  packingList: ["number", "date", "invoiceRef", "shipmentRef", "totalPackages", "totalNetKg", "totalGrossKg"],
+  billOfLading: ["number", "date", "shipmentRef", "consignee", "packages", "grossKg"],
+};
+const RULE_READ_LINE_FIELDS = { invoice: ["sku", "qty", "unit", "unitPrice", "lineTotal", "hsCode"], packingList: ["sku", "qty", "unit", "packages", "netKg", "grossKg", "hsCode"] };
+test("blanking any field a rule reads never yields a clean PASS (R21 or R22 is raised, once, naming the field)", () => {
+  const base = JSON.parse(readFileSync(join(casesDir, "C00_clean.json"), "utf8")).bundle;
+  assert.equal(reconcile(base, {}).findings.length, 0, "C00 must be clean to start");
+  for (const [doc, fields] of Object.entries(RULE_READ_FIELDS)) for (const k of fields) for (const blank of ["", null, undefined]) {
+    const b = structuredClone(base); b[doc][k] = blank;
+    const r = reconcile(b, {});
+    const hits = r.findings.filter((f) => (f.rule === "R21" || f.rule === "R22") && f.field === k);
+    assert.ok(hits.length >= 1, `${doc}.${k} blanked (${String(blank)}) → no R21/R22`);
+    assert.ok(r.findings.filter((f) => f.rule === "R22").length <= 1, `${doc}.${k}: R22 must be reported once`);
+  }
+  for (const [doc, fields] of Object.entries(RULE_READ_LINE_FIELDS)) for (const k of fields) {
+    const b = structuredClone(base); b[doc].lines[0][k] = "";
+    const r = reconcile(b, {});
+    assert.ok(r.findings.some((f) => (f.rule === "R21" || f.rule === "R22") && f.field === k), `${doc}.lines[0].${k} blanked → no R21/R22`);
+  }
+});
+
+test("non-numeric where a number is expected is R21, not a silent skip", () => {
+  const base = JSON.parse(readFileSync(join(casesDir, "C00_clean.json"), "utf8")).bundle;
+  for (const [doc, k] of [["packingList", "totalGrossKg"], ["packingList", "totalPackages"], ["billOfLading", "grossKg"], ["billOfLading", "packages"]]) {
+    const b = structuredClone(base); b[doc][k] = "n/a";
+    assert.ok(reconcile(b, {}).findings.some((f) => f.rule === "R21" && f.field === k), `${doc}.${k}`);
   }
 });

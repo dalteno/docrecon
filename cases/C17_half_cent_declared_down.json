@@ -45,7 +45,8 @@
           "qty": "1.5",
           "unit": "KG",
           "unitPrice": "0.01",
-          "lineTotal": "0.01"
+          "lineTotal": "0.01",
+          "hsCode": "7318.21"
         }
       ]
     },
@@ -91,7 +92,8 @@
           "unit": "KG",
           "packages": "1",
           "netKg": "1.500",
-          "grossKg": "1.600"
+          "grossKg": "1.600",
+          "hsCode": "7318.21"
         }
       ]
     },

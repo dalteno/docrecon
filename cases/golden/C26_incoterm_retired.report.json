@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "status": "PASS",
-  "rulesEvaluated": 21,
+  "rulesEvaluated": 22,
   "summary": {
     "BLOCKER": 0,
     "WARNING": 0,

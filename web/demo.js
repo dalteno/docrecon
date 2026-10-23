@@ -10,6 +10,13 @@ const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const T = (k) => (window.DaltenoI18n ? window.DaltenoI18n.t(k) : k);
 const tt = (k, fallback) => { const v = T(k); return v === k ? fallback : v; };
+/** Finding reasons are engine output (English, under golden test). For AR/DE/NL the UI renders a translated sentence from the
+ *  finding's structured fields (rule, key, field, expected, actual); the engine's own reason stays available as a tooltip. */
+const reasonFor = (f) => {
+  const tpl = T("rr_" + f.rule);
+  if (tpl === "rr_" + f.rule) return f.reason;
+  return tpl.replace(/\{(\w+)\}/g, (_, k) => String(f[k] ?? ""));
+};
 
 let cases = [], current = null, bundle = null, options = {};
 
@@ -45,7 +52,7 @@ function run() {
     <td><span class="sev">${f.severity}</span></td>
     <td><code>${esc(f.field)}</code><br><small>${esc(f.documents.join(" · "))}</small></td>
     <td><small>${esc(tt("w_expected", "expected"))}</small> ${esc(f.expected)}<br><small>${esc(tt("w_found", "found"))}</small> ${esc(f.actual)}</td>
-    <td lang="en" dir="ltr">${esc(f.reason)}</td></tr>`).join("");
+    <td title="${esc(f.reason)}">${esc(reasonFor(f))}</td></tr>`).join("");
   $("#findings").innerHTML = rows ? `<table><thead><tr><th>${esc(tt("w_h_rule", "rule"))}</th><th>${esc(tt("w_h_sev", "severity"))}</th><th>${esc(tt("w_h_field", "field"))}</th><th>${esc(tt("w_h_values", "values"))}</th><th>${esc(tt("w_h_why", "why"))}</th></tr></thead><tbody>${rows}</tbody></table>` : `<p class="ok">${esc(tt("w_ok", "No findings — the three documents agree under every rule."))}</p>`;
   $("#pin").innerHTML = current ? `<a href="${REPO}/blob/main/cases/${current.id}.json">cases/${current.id}.json</a> ${esc(tt("w_pins", "pins this case: expects"))} ${current.expect.length ? current.expect.map((e) => `<code>${esc(e)}</code>`).join(" ") : `<code>${esc(tt("w_none", "no findings"))}</code>`}` : "";
   $("#download").onclick = () => {

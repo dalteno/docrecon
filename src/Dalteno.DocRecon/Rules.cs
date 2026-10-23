@@ -62,6 +62,7 @@ public static class RuleCatalogue
         new("R19", "UNIT_MISMATCH", Severity.BLOCKER, "Unit of measure must agree per SKU between invoice and packing list."),
         new("R20", "PACKING_TOTALS_ARITHMETIC", Severity.WARNING, "Packing-list totals must equal the sum of their lines (packages, net, gross)."),
         new("R21", "MISSING_REQUIRED", Severity.BLOCKER, "A required document, field or line set is absent."),
+        new("R22", "FIELD_ABSENT", Severity.WARNING, "A field another rule needs is absent, so that rule could not run. Reported once per field; absence is never treated as a match."),
     };
 
     private static readonly Dictionary<string, Rule> ById = All.ToDictionary(r => r.Id);

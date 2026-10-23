@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "status": "BLOCKED",
+  "rulesEvaluated": 22,
+  "summary": {
+    "BLOCKER": 2,
+    "WARNING": 0,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "billOfLading.packages",
+      "field": "packages",
+      "expected": "number",
+      "actual": "twelve",
+      "reason": "billOfLading.packages is not a number.",
+      "documents": [
+        "billOfLading"
+      ]
+    },
+    {
+      "rule": "R21",
+      "code": "MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "key": "packingList:PMP-200:netKg",
+      "field": "netKg",
+      "expected": "number",
+      "actual": "n/a",
+      "reason": "packingList:PMP-200:netKg is not a number.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

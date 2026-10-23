@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "status": "REVIEW",
+  "rulesEvaluated": 22,
+  "summary": {
+    "BLOCKER": 0,
+    "WARNING": 2,
+    "INFO": 0
+  },
+  "findings": [
+    {
+      "rule": "R22",
+      "code": "FIELD_ABSENT",
+      "severity": "WARNING",
+      "key": "packingList:VLV-050:hsCode",
+      "field": "hsCode",
+      "expected": "present",
+      "actual": "absent",
+      "reason": "packingList:VLV-050:hsCode is absent; R14 (HS code) could not run.",
+      "documents": [
+        "packingList"
+      ]
+    },
+    {
+      "rule": "R22",
+      "code": "FIELD_ABSENT",
+      "severity": "WARNING",
+      "key": "packingList:VLV-050:unit",
+      "field": "unit",
+      "expected": "present",
+      "actual": "absent",
+      "reason": "packingList:VLV-050:unit is absent; R19 (unit of measure) could not run.",
+      "documents": [
+        "packingList"
+      ]
+    }
+  ]
+}

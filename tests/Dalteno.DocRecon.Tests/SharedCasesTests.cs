@@ -113,6 +113,45 @@ public sealed class SharedCasesTests
         Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "invoice.lines[0].sku");
         Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Key == "packingList.lines[1].sku");
     }
+
+    public static IEnumerable<object[]> RuleReadFields()
+    {
+        foreach (var f in new[] { "number", "date", "currency", "incoterm", "buyer", "total" }) yield return new object[] { "invoice", f };
+        foreach (var f in new[] { "number", "date", "invoiceRef", "shipmentRef", "totalPackages", "totalNetKg", "totalGrossKg" }) yield return new object[] { "packingList", f };
+        foreach (var f in new[] { "number", "date", "shipmentRef", "consignee", "packages", "grossKg" }) yield return new object[] { "billOfLading", f };
+    }
+
+    [Theory]
+    [MemberData(nameof(RuleReadFields))]
+    public void BlankingAFieldARuleReadsNeverYieldsACleanPass(string doc, string field)
+    {
+        // Absence is never a match: R21 or R22 must name the field, and R22 at most once (JS parity: cases.test.mjs sweep).
+        var root = JsonNode.Parse(File.ReadAllText(Path.Combine(CasesDir, "C00_clean.json")))!.AsObject();
+        foreach (var blank in new JsonNode?[] { JsonValue.Create(""), null })
+        {
+            var bundle = JsonNode.Parse(root["bundle"]!.ToJsonString())!.AsObject();
+            bundle[doc]![field] = blank;
+            var b = JsonSerializer.Deserialize<Bundle>(bundle.ToJsonString(), Json.Options)!;
+            var report = Reconciler.Reconcile(b, ReconcileOptions.Default);
+            Assert.Contains(report.Findings, x => (x.Rule == "R21" || x.Rule == "R22") && x.Field == field);
+            Assert.True(report.Findings.Count(x => x.Rule == "R22") <= 1, $"{doc}.{field}: R22 must be reported once");
+        }
+    }
+
+    [Theory]
+    [InlineData("packingList", "totalGrossKg")]
+    [InlineData("packingList", "totalPackages")]
+    [InlineData("billOfLading", "grossKg")]
+    [InlineData("billOfLading", "packages")]
+    public void NonNumericWhereANumberIsExpectedIsR21(string doc, string field)
+    {
+        var root = JsonNode.Parse(File.ReadAllText(Path.Combine(CasesDir, "C00_clean.json")))!.AsObject();
+        var bundle = root["bundle"]!.AsObject();
+        bundle[doc]![field] = "n/a";
+        var b = JsonSerializer.Deserialize<Bundle>(bundle.ToJsonString(), Json.Options)!;
+        var report = Reconciler.Reconcile(b, ReconcileOptions.Default);
+        Assert.Contains(report.Findings, x => x.Rule == "R21" && x.Field == field);
+    }
 }
 
 /// <summary>Helper-level tests mirroring web/tests/cases.test.mjs.</summary>
@@ -190,7 +229,7 @@ public sealed class NumericTests
     [Fact]
     public void RuleCatalogueIsStable()
     {
-        Assert.Equal(21, RuleCatalogue.All.Count);
-        Assert.Equal(21, RuleCatalogue.All.Select(r => r.Id).Distinct().Count());
+        Assert.Equal(22, RuleCatalogue.All.Count);
+        Assert.Equal(22, RuleCatalogue.All.Select(r => r.Id).Distinct().Count());
     }
 }
