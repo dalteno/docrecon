@@ -5,3 +5,7 @@ obj/
 TestResults/
 node_modules/
 *.trx
+
+# local operator scripts, never part of the engine
+/*.ps1
+
