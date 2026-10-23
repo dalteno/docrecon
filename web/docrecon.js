@@ -10,7 +10,7 @@
  *  - no I/O, no clock, no randomness: same bundle + same options ⇒ same report, byte for byte.
  */
 
-export const VERSION = "1.0.0";
+export const VERSION = "1.1.0";
 
 /** Scales for integer arithmetic (ADR-0002). */
 export const SCALE = Object.freeze({ MONEY: 100, QTY: 1000, KG: 1000 });

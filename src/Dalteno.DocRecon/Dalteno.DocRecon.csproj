@@ -7,7 +7,7 @@
     <NoWarn>CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Dalteno.DocRecon</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Dalteno</Authors>
     <Description>Deterministic reconciliation of commercial invoice, packing list and bill of lading.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

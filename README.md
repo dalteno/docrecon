@@ -130,6 +130,13 @@ node web/tests/write-golden.mjs && node web/tests/write-golden-docflow.mjs   # a
 dotnet test                                                # both .NET libraries + parity with golden
 ```
 
+## Versions
+
+| docrecon | date | change |
+|---|---|---|
+| 1.1.0 | 2026-10-23 | **Behaviour change.** New rule R22 FIELD_ABSENT: a field another rule reads but which is absent is reported once (WARNING) and the rule is skipped — bundles that previously reconciled as `PASS` with blank dates, parties, weights, package counts or units now return `REVIEW`. Non-numeric weights/package counts/totals are R21 instead of a silent skip. Cases C54–C56, blank-field sweep tests, ADR-0005. |
+| 1.0.0 | 2026-10-15 | First release: 21 rules, 55 shared cases, JS ↔ .NET parity. |
+
 ## Scope
 
 Rules cover document consistency, not customs law: valuation, origin, tariff classification and sanctions

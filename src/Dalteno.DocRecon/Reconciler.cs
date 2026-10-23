@@ -11,7 +11,7 @@ namespace Dalteno.DocRecon;
 public static class Reconciler
 {
     /// <summary>Engine version (reported in every <see cref="Report"/>).</summary>
-    public const string Version = "1.0.0";
+    public const string Version = "1.1.0";
 
     private sealed class InvAgg { public BigInteger? Qty; public BigInteger? Price; public BigInteger? Total; public string Hs = ""; public string Unit = ""; public bool DupFlagged; }
     private sealed class PlAgg { public BigInteger? Qty; public BigInteger? Net; public BigInteger? Gross; public BigInteger? Pk; public string Hs = ""; public string Unit = ""; }
