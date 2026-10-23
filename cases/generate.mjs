@@ -130,4 +130,7 @@ for (const f of readdirSync(out)) if (f.endsWith(".json")) unlinkSync(join(out, 
 for (const c of cases) writeFileSync(join(out, `${c.id}.json`), JSON.stringify(c, null, 2) + "\n");
 const ids = new Set(cases.map((c) => c.id));
 if (ids.size !== cases.length) throw new Error("duplicate case id");
-console.log(`wrote ${cases.length} cases (${cases.filter((c) => c.adversarial).length} adversarial) to ${out}`);
+// the browser demo loads one bundle (web/cases.json) — written here, from the same list, so it can never drift from cases/*.json
+const bundle = [...cases].sort((x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+writeFileSync(join(here, "..", "web", "cases.json"), JSON.stringify(bundle, null, 1) + "\n");
+console.log(`wrote ${cases.length} cases (${cases.filter((c) => c.adversarial).length} adversarial) to ${out} and web/cases.json`);

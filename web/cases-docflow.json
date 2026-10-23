@@ -1,0 +1,6688 @@
+[
+ {
+  "id": "D00_happy_path",
+  "title": "Six required documents, definition order → CLOSED",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D01_reverse_arrival",
+  "title": "Documents arrive in reverse order → same outcome",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D02_eager_approvals",
+  "title": "Approve each document as it arrives; customs entry too early → F08, later succeeds",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F08|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D03_duplicate_receive_ignored",
+  "title": "Same packing-list bytes received twice → ignored (F02), nothing duplicated",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [
+    "F02|PACKING_LIST"
+   ],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D04_new_version_before_ack",
+  "title": "Packing list v2 arrives after approval, before ERP ack → v1 integration cancelled, old key rejected, re-approval queues v2",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 2,
+    "sha": "sha-PACKING_LIST-v2",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v2",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F06|INTEGRATION_ACK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 7,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D05_new_version_after_integration",
+  "title": "Invoice v2 after it was already integrated → superseded, reconciliation re-run, new integration key",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 2,
+    "sha": "sha-COMMERCIAL_INVOICE-v2",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v2",
+    "at": "2026-03-14"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-14"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 7,
+   "integrationAcked": 7
+  }
+ },
+ {
+  "id": "D06_version_not_above_current",
+  "title": "Re-sending v1 with different bytes → rejected (F03)",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-other",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F03|COMMERCIAL_INVOICE"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D07_wrong_role",
+  "title": "FINANCE tries to approve the packing list → F01; WAREHOUSE succeeds",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "APPROVED",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F01|PACKING_LIST"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D08_reject_resubmit",
+  "title": "Rejection without reason → F14; with reason → REJECTED + intake notified; approving a rejected doc → F03; v2 approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "REJECT",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "reason": "",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "REJECT",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "reason": "issuer stamp missing",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 2,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v2",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F03|CERTIFICATE_OF_ORIGIN",
+    "F14|CERTIFICATE_OF_ORIGIN"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 3,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D09_ack_unknown_key",
+  "title": "ERP acknowledges an unknown key → F06",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F06|INTEGRATION_ACK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D10_ack_twice_ignored",
+  "title": "Second ack for the same key → ignored (F06)",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [
+    "F06|INTEGRATION_ACK"
+   ],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 1
+  }
+ },
+ {
+  "id": "D11_reconciliation_blocked",
+  "title": "Packed qty ≠ invoiced → docrecon BLOCKED → compliance notified → customs entry approval refused (F07)",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-pl-short",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "140",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "AWAITING_APPROVAL",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "BLOCKED",
+   "rejected": [
+    "F07|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D12_blocked_then_corrected",
+  "title": "Corrected packing list v2 → reconciliation re-run PASS → customs entry approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-pl-short",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "140",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 2,
+    "sha": "sha-PACKING_LIST-v2",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "APPROVED",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F07|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 2,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D13_customs_entry_before_reconciliation",
+  "title": "Customs entry approval before the three documents exist → F07 (gate not run)",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "AWAITING_APPROVAL",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F07|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 3,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D14_customs_entry_before_coo",
+  "title": "Customs entry approval before certificate of origin is approved → F08",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "AWAITING_APPROVAL",
+    "CUSTOMS_ENTRY": "AWAITING_APPROVAL",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F08|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 5,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D15_insurance_under_cover",
+  "title": "Cover 18,000 < invoice 18,450 → F09",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-ins-low",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18000.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "AWAITING_APPROVAL",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F09|INSURANCE_CERT"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D16_insurance_currency_mismatch",
+  "title": "Cover in USD on a EUR invoice → F09",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-ins-usd",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "USD",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "AWAITING_APPROVAL",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F09|INSURANCE_CERT"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D17_insurance_before_invoice",
+  "title": "Insurance approval before the invoice exists → F09",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "AWAITING_APPROVAL",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F09|INSURANCE_CERT"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D18_insurance_equal_cover",
+  "title": "Cover exactly equal to the invoice total → approved (boundary)",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "APPROVED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D19_inspection_required",
+  "title": "requiresInspection → six integrated is not enough; closes only after the inspection certificate",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026",
+   "requiresInspection": true
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSPECTION_CERT",
+    "version": 1,
+    "sha": "sha-INSPECTION_CERT-v1",
+    "payload": {
+     "certNo": "INS-2026-0421",
+     "result": "CONFORM"
+    },
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSPECTION_CERT",
+    "role": "QUALITY",
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSPECTION_CERT|v1",
+    "at": "2026-03-14"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "INTEGRATED"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 7,
+   "integrationAcked": 7
+  }
+ },
+ {
+  "id": "D20_inspection_optional_but_sent",
+  "title": "Inspection not required but sent → processed; closure ignores it; commands after close → F11",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSPECTION_CERT",
+    "version": 1,
+    "sha": "sha-INSPECTION_CERT-v1",
+    "payload": {
+     "certNo": "INS-2026-0421",
+     "result": "CONFORM"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSPECTION_CERT",
+    "role": "QUALITY",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSPECTION_CERT|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "APPROVED"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F11|INTEGRATION_ACK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 7,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D21_sla_breach_once",
+  "title": "BL (SLA 1 day): no breach at +1, breach at +2, never a second one",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-13"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [
+    "BILL_OF_LADING"
+   ],
+   "slaBreaches": 1,
+   "notifications": 2,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D22_sla_boundary",
+  "title": "Invoice approved exactly at SLA (2 days) → no breach",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "APPROVED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D23_sla_reset_by_new_version",
+  "title": "Breach on v1; v2 restarts the clock",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 2,
+    "sha": "sha-BILL_OF_LADING-v2",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-13"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-14"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 1,
+   "notifications": 3,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D24_sla_checked_on_any_command",
+  "title": "A breach is detected on the next command of any kind, not only on TICK",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-13"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [
+    "BILL_OF_LADING"
+   ],
+   "slaBreaches": 1,
+   "notifications": 3,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D25_extraction_failed_then_fixed",
+  "title": "Invoice without buyer → extraction failed (F04 on approve); v2 complete → approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-inv-nobuyer",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 2,
+    "sha": "sha-COMMERCIAL_INVOICE-v2",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "APPROVED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F04|COMMERCIAL_INVOICE"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D26_extraction_failure_blocks_reconciliation",
+  "title": "BL without seals → extraction failed → reconciliation does not run",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-bl-noseals",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": []
+    },
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "EXTRACTION_FAILED",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 3,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D27_unknown_document_type",
+  "title": "PROFORMA is not in the dossier definition → F15",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "PROFORMA",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F15|PROFORMA"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D28_approve_missing_document",
+  "title": "Approving a document that never arrived → F04",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F04|PACKING_LIST"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D29_commands_after_close",
+  "title": "TICK after closure → F11",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-13"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F11|TICK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 6,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D30_bad_version_values",
+  "title": "Version 0 and version '1' (string) → rejected (F03)",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 0,
+    "sha": "sha-COMMERCIAL_INVOICE-v0",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": "1",
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F03|COMMERCIAL_INVOICE",
+    "F03|COMMERCIAL_INVOICE"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D31_invalid_date",
+  "title": "Command dated 2026-02-30 → F16",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-02-30"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F16|COMMERCIAL_INVOICE"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D32_unknown_command",
+  "title": "Unknown verb → F16",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "FOO",
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F16|FOO"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D33_approve_twice_ignored",
+  "title": "Approving an already approved document → ignored (F05), no second integration",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "APPROVED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [
+    "F05|COMMERCIAL_INVOICE"
+   ],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D34_reject_integrated",
+  "title": "Rejecting an integrated document → F03 (a new version is the only way back)",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "REJECT",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "reason": "wrong buyer",
+    "at": "2026-03-13"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F03|COMMERCIAL_INVOICE"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 1
+  }
+ },
+ {
+  "id": "D35_same_sha_higher_version",
+  "title": "Same bytes labelled v2 → still ignored (F02): bytes decide, not labels",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 2,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [
+    "F02|COMMERCIAL_INVOICE"
+   ],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D36_reconciliation_flips_with_versions",
+  "title": "PASS → invoice v2 breaks totals → BLOCKED (entry refused) → invoice v3 fixes → PASS (entry approved)",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 2,
+    "sha": "sha-inv-v2",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18500.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 3,
+    "sha": "sha-COMMERCIAL_INVOICE-v3",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "APPROVED",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [
+    "F07|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 8,
+   "integrationQueued": 2,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D37_ack_key_from_other_dossier",
+  "title": "Key of another dossier → F06",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-78-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "APPROVED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F06|INTEGRATION_ACK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D38_reject_after_approval_cancels_integration",
+  "title": "Approved then rejected before ERP ack → pending integration cancelled, late ack rejected (F06)",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "REJECT",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "reason": "duplicate of INV-0416",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "REJECTED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F06|INTEGRATION_ACK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 2,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D40_late_approvals_full_dossier",
+  "title": "Everything approved five days late → five SLA breaches, dossier still closes",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-BILL_OF_LADING-v1",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "1990.000",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "INSURANCE_CERT",
+    "version": 1,
+    "sha": "sha-INSURANCE_CERT-v1",
+    "payload": {
+     "policyNo": "MAR-2026-1190",
+     "coveredValue": "18450.00",
+     "currency": "EUR",
+     "insurer": "Delta Marine"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "PACKING_LIST",
+    "role": "WAREHOUSE",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "BILL_OF_LADING",
+    "role": "LOGISTICS",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "INSURANCE_CERT",
+    "role": "FINANCE",
+    "at": "2026-03-15"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|COMMERCIAL_INVOICE|v1",
+    "at": "2026-03-16"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|PACKING_LIST|v1",
+    "at": "2026-03-16"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|BILL_OF_LADING|v1",
+    "at": "2026-03-16"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CERTIFICATE_OF_ORIGIN|v1",
+    "at": "2026-03-16"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|CUSTOMS_ENTRY|v1",
+    "at": "2026-03-16"
+   },
+   {
+    "cmd": "INTEGRATION_ACK",
+    "key": "SHP-77-2026|INSURANCE_CERT|v1",
+    "at": "2026-03-16"
+   }
+  ],
+  "expect": {
+   "status": "CLOSED",
+   "documents": {
+    "COMMERCIAL_INVOICE": "INTEGRATED",
+    "PACKING_LIST": "INTEGRATED",
+    "BILL_OF_LADING": "INTEGRATED",
+    "CERTIFICATE_OF_ORIGIN": "INTEGRATED",
+    "CUSTOMS_ENTRY": "INTEGRATED",
+    "INSURANCE_CERT": "INTEGRATED",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "PASS",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [
+    "BILL_OF_LADING",
+    "CERTIFICATE_OF_ORIGIN",
+    "COMMERCIAL_INVOICE",
+    "INSURANCE_CERT",
+    "PACKING_LIST"
+   ],
+   "slaBreaches": 5,
+   "notifications": 11,
+   "integrationQueued": 6,
+   "integrationAcked": 6
+  }
+ },
+ {
+  "id": "D41_empty_dossier",
+  "title": "No commands → OPEN, everything MISSING",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "MISSING",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 0,
+   "integrationQueued": 0,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D42_clock_never_runs_backwards",
+  "title": "An approval dated before the last processed command → F17; a later TICK is fine",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-12"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "TICK",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "COMMERCIAL_INVOICE",
+    "role": "FINANCE",
+    "at": "2026-03-12"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "APPROVED",
+    "PACKING_LIST": "MISSING",
+    "BILL_OF_LADING": "MISSING",
+    "CERTIFICATE_OF_ORIGIN": "MISSING",
+    "CUSTOMS_ENTRY": "MISSING",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": null,
+   "rejected": [
+    "F17|COMMERCIAL_INVOICE",
+    "F17|TICK"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 1,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D43_review_blocks_without_signoff",
+  "title": "BL without gross weight → reconciliation REVIEW (R22, 0 blockers) → customs entry approval refused (F18); a REVIEW never passes the gate silently",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-bl-nogross",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "AWAITING_APPROVAL",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "REVIEW",
+   "rejected": [
+    "F18|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 5,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D44_review_accepted_with_reason",
+  "title": "Same REVIEW; the broker approves with acceptWarnings and a written reason → accepted, recorded, customs entry approved",
+  "adversarial": false,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-bl-nogross",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "acceptWarnings": true,
+    "reason": "gross weight will be taken from the weighbridge certificate",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "APPROVED",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "REVIEW",
+   "rejected": [],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 5,
+   "integrationQueued": 2,
+   "integrationAcked": 0
+  }
+ },
+ {
+  "id": "D45_signoff_cannot_override_blocked_or_skip_reason",
+  "title": "acceptWarnings without a reason → F18; acceptWarnings on a BLOCKED reconciliation → still F07",
+  "adversarial": true,
+  "note": "",
+  "dossier": {
+   "id": "SHP-77-2026"
+  },
+  "commands": [
+   {
+    "cmd": "RECEIVE",
+    "type": "COMMERCIAL_INVOICE",
+    "version": 1,
+    "sha": "sha-COMMERCIAL_INVOICE-v1",
+    "payload": {
+     "number": "INV-2026-0417",
+     "date": "2026-03-02",
+     "currency": "EUR",
+     "incoterm": "FOB",
+     "seller": "Nile Components Co.",
+     "buyer": "Rheinwerk Automation GmbH",
+     "total": "18450.00",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "unitPrice": "1200.00",
+       "lineTotal": "12000.00",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "unitPrice": "35.00",
+       "lineTotal": "5250.00",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "unitPrice": "3.00",
+       "lineTotal": "1200.00",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 1,
+    "sha": "sha-PACKING_LIST-v1",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "150",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "BILL_OF_LADING",
+    "version": 1,
+    "sha": "sha-bl-nogross",
+    "payload": {
+     "number": "MSKU-99120034",
+     "date": "2026-03-09",
+     "shipmentRef": "SHP-77-2026",
+     "shipper": "Nile Components Co.",
+     "consignee": "Rheinwerk Automation GmbH",
+     "packages": "12",
+     "grossKg": "",
+     "portOfLoading": "EGALY",
+     "portOfDischarge": "DEHAM",
+     "containers": [
+      "MSKU1234567"
+     ],
+     "seals": [
+      "SL-778812"
+     ]
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "version": 1,
+    "sha": "sha-CERTIFICATE_OF_ORIGIN-v1",
+    "payload": {
+     "number": "COO-2026-0088",
+     "originCountry": "EG",
+     "invoiceRef": "INV-2026-0417",
+     "issuer": "Chamber of Commerce Alexandria"
+    },
+    "at": "2026-03-10"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CERTIFICATE_OF_ORIGIN",
+    "role": "CUSTOMS_BROKER",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "CUSTOMS_ENTRY",
+    "version": 1,
+    "sha": "sha-CUSTOMS_ENTRY-v1",
+    "payload": {
+     "entryNo": "CE-ALY-2026-5531",
+     "declaredValue": "18450.00",
+     "currency": "EUR",
+     "hsCodes": [
+      "841370",
+      "848180",
+      "848410"
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "acceptWarnings": true,
+    "reason": "",
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "RECEIVE",
+    "type": "PACKING_LIST",
+    "version": 2,
+    "sha": "sha-pl-short",
+    "payload": {
+     "number": "PL-0417",
+     "date": "2026-03-04",
+     "invoiceRef": "INV-2026-0417",
+     "shipmentRef": "SHP-77-2026",
+     "totalPackages": "12",
+     "totalNetKg": "1840.000",
+     "totalGrossKg": "1990.000",
+     "lines": [
+      {
+       "sku": "PMP-200",
+       "qty": "10",
+       "unit": "PCS",
+       "packages": "10",
+       "netKg": "1500.000",
+       "grossKg": "1600.000",
+       "hsCode": "8413.70"
+      },
+      {
+       "sku": "VLV-050",
+       "qty": "140",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "300.000",
+       "grossKg": "340.000",
+       "hsCode": "8481.80"
+      },
+      {
+       "sku": "GSK-012",
+       "qty": "400",
+       "unit": "PCS",
+       "packages": "1",
+       "netKg": "40.000",
+       "grossKg": "50.000",
+       "hsCode": "8484.10"
+      }
+     ]
+    },
+    "at": "2026-03-11"
+   },
+   {
+    "cmd": "APPROVE",
+    "type": "CUSTOMS_ENTRY",
+    "role": "CUSTOMS_BROKER",
+    "acceptWarnings": true,
+    "reason": "trying to force it",
+    "at": "2026-03-11"
+   }
+  ],
+  "expect": {
+   "status": "OPEN",
+   "documents": {
+    "COMMERCIAL_INVOICE": "AWAITING_APPROVAL",
+    "PACKING_LIST": "AWAITING_APPROVAL",
+    "BILL_OF_LADING": "AWAITING_APPROVAL",
+    "CERTIFICATE_OF_ORIGIN": "APPROVED",
+    "CUSTOMS_ENTRY": "AWAITING_APPROVAL",
+    "INSURANCE_CERT": "MISSING",
+    "INSPECTION_CERT": "MISSING"
+   },
+   "reconciliation": "BLOCKED",
+   "rejected": [
+    "F07|CUSTOMS_ENTRY",
+    "F18|CUSTOMS_ENTRY"
+   ],
+   "ignored": [],
+   "slaBreached": [],
+   "slaBreaches": 0,
+   "notifications": 7,
+   "integrationQueued": 1,
+   "integrationAcked": 0
+  }
+ }
+]

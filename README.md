@@ -125,7 +125,7 @@ the engine never writes to operational ERP tables. OCR and e-mail intake are ada
 ## Develop
 
 ```
-node cases/generate.mjs && node cases-docflow/generate.mjs   # regenerate shared cases (must leave git clean)
+node cases/generate.mjs && node cases-docflow/generate.mjs   # regenerate shared cases + the browser bundles web/cases.json and web/cases-docflow.json (must leave git clean; CI checks)
 node --test web/tests/cases.test.mjs web/tests/docflow.test.mjs
 node web/tests/write-golden.mjs && node web/tests/write-golden-docflow.mjs   # after an intentional rule change
 dotnet test                                                # both .NET libraries + parity with golden

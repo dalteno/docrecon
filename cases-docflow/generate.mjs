@@ -200,4 +200,6 @@ mkdirSync(here, { recursive: true });
 for (const f of readdirSync(here)) if (f.endsWith(".json")) unlinkSync(join(here, f));
 const ids = new Set();
 for (const c of cases) { if (ids.has(c.id)) throw new Error("dup " + c.id); ids.add(c.id); writeFileSync(join(here, `${c.id}.json`), JSON.stringify(c, null, 2) + "\n"); }
-console.log(`wrote ${cases.length} cases (${cases.filter((c) => c.adversarial).length} adversarial)`);
+const bundle = [...cases].sort((x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+writeFileSync(join(here, "..", "web", "cases-docflow.json"), JSON.stringify(bundle, null, 1) + "\n");
+console.log(`wrote ${cases.length} cases (${cases.filter((c) => c.adversarial).length} adversarial) and web/cases-docflow.json`);

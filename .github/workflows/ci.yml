@@ -12,7 +12,7 @@ jobs:
         with: { node-version: 22 }
       - run: node cases/generate.mjs && node cases-docflow/generate.mjs
       - name: cases must be committed exactly as generated
-        run: git diff --exit-code -- cases cases-docflow
+        run: git diff --exit-code -- cases cases-docflow web/cases.json web/cases-docflow.json
       - run: node --test web/tests/cases.test.mjs web/tests/docflow.test.mjs web/tests/formmerge.test.mjs
       - name: golden reports must exist for every case (parity gate)
         run: |
