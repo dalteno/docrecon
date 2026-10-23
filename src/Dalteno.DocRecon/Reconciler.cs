@@ -242,7 +242,7 @@ public static class Reconciler
         // ── parties ──
         var hasBuyer = inv is not null && Text("invoice", "invoice.buyer", "buyer", inv.Buyer, "R17 (consignee match)");
         var hasConsignee = bl is not null && Text("billOfLading", "billOfLading.consignee", "consignee", bl.Consignee, "R17 (consignee match)");
-        if (hasBuyer && hasConsignee)
+        if (hasBuyer && hasConsignee && inv is not null && bl is not null) // the two bools already imply non-null; the compiler cannot see that
         {
             var a = NormParty(inv.Buyer, opt.LegalSuffixes); var b = NormParty(bl.Consignee, opt.LegalSuffixes);
             if (a != b) Add("R17", "consignee", "consignee", inv.Buyer, bl.Consignee, $"BL consignee \"{bl.Consignee}\" does not match invoice buyer \"{inv.Buyer}\" after normalisation ({a} ≠ {b}).", "invoice", "billOfLading");
